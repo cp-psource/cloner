@@ -1,0 +1,12 @@
+{
+	"numResults": 1,
+	"creationDate": "2018-05-09 19:51:09",
+	"results": {
+		"cloner.php": [
+			{
+				"line": 8,
+				"match": "Version: 1.8.3"
+			}
+		]
+	}
+}
