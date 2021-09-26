@@ -39,5 +39,5 @@ if ( ! function_exists( 'copier_replace_shortcodes_ultimate_post_shortcode' ) ) 
 		}
 
 	}
-	add_action( 'wpmudev_copier-copy-after_copying', 'copier_replace_shortcodes_ultimate_post_shortcode', 10, 3 );
+	add_action( 'psource_copier-copy-after_copying', 'copier_replace_shortcodes_ultimate_post_shortcode', 10, 3 );
 }

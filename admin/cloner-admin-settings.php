@@ -3,7 +3,7 @@
 /**
  * Based on Tom McFarlin's Plugin Boilerplate https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate
  */
-class WPMUDEV_Cloner_Admin_Settings {
+class PSOURCE_Cloner_Admin_Settings {
 
 	/**
 	 * Instance of this class.
@@ -40,8 +40,8 @@ class WPMUDEV_Cloner_Admin_Settings {
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
 		add_filter( 'network_admin_plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-		if ( ! defined( 'WPMUDEV_CLONER_ASSETS_URL' ) )
-			define( 'WPMUDEV_CLONER_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets' );
+		if ( ! defined( 'PSOURCE_CLONER_ASSETS_URL' ) )
+			define( 'PSOURCE_CLONER_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets' );
 
 	}
 
@@ -71,8 +71,8 @@ class WPMUDEV_Cloner_Admin_Settings {
 
 		$this->plugin_screen_hook_suffix = add_submenu_page(
 			'settings.php',
-			__( 'Cloner-Einstellungen', WPMUDEV_CLONER_LANG_DOMAIN ),
-			__( 'Cloner', WPMUDEV_CLONER_LANG_DOMAIN ),
+			__( 'Cloner-Einstellungen', PSOURCE_CLONER_LANG_DOMAIN ),
+			__( 'Cloner', PSOURCE_CLONER_LANG_DOMAIN ),
 			'manage_network',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
@@ -88,12 +88,12 @@ class WPMUDEV_Cloner_Admin_Settings {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
-		$to_copy_labels = wpmudev_cloner_get_settings_labels();
-		$to_copy_labels = apply_filters( 'wpmudev_cloner_to_copy_labels_settings', $to_copy_labels );
+		$to_copy_labels = psource_cloner_get_settings_labels();
+		$to_copy_labels = apply_filters( 'psource_cloner_to_copy_labels_settings', $to_copy_labels );
 
-		$settings = wpmudev_cloner_get_settings();
+		$settings = psource_cloner_get_settings();
 
-		$errors = get_settings_errors( 'wpmudev_cloner_settings' );
+		$errors = get_settings_errors( 'psource_cloner_settings' );
 
 		$updated = false;
 		if ( isset( $_GET['updated'] ) )
@@ -119,7 +119,7 @@ class WPMUDEV_Cloner_Admin_Settings {
 		if ( $menu_page_url ) {
 			$links = array_merge(
 				array(
-					'settings' => '<a href="' . network_admin_url( 'settings.php?page=' . $this->plugin_slug ) . '">' . __( 'Einstellungen', WPMUDEV_CLONER_LANG_DOMAIN ) . '</a>'
+					'settings' => '<a href="' . network_admin_url( 'settings.php?page=' . $this->plugin_slug ) . '">' . __( 'Einstellungen', PSOURCE_CLONER_LANG_DOMAIN ) . '</a>'
 				),
 				$links
 			);	
@@ -133,20 +133,20 @@ class WPMUDEV_Cloner_Admin_Settings {
 		if ( empty( $_POST['submit'] ) )
 			return;
 
-		check_admin_referer( 'wpmudev_cloner_settings' );
+		check_admin_referer( 'psource_cloner_settings' );
 
 		if ( empty( $_POST['to_copy'] ) ) {
-			add_settings_error( 'wpmudev_cloner_settings', 'empty-settings', __( 'Du musst mindestens eine Option aktivieren', WPMUDEV_CLONER_LANG_DOMAIN ) );
+			add_settings_error( 'psource_cloner_settings', 'empty-settings', __( 'Du musst mindestens eine Option aktivieren', PSOURCE_CLONER_LANG_DOMAIN ) );
 			return;
 		}
 
-		$settings = wpmudev_cloner_get_settings();
+		$settings = psource_cloner_get_settings();
 
 		$to_copy = array_keys( $_POST['to_copy'] );
 		$settings['to_copy'] = $to_copy;
 		$settings['to_replace'] = ( isset( $_POST['to_replace'] ) ) ? array_keys( $_POST['to_replace'] ) : array();
 
-		wpmudev_cloner_update_settings( $settings );
+		psource_cloner_update_settings( $settings );
 
 		$redirect = add_query_arg( 
 			array( 

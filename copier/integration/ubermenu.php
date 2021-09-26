@@ -1,7 +1,7 @@
 <?php
 
 if ( ! function_exists( 'copier_remap_ubermenu_id' ) ) {
-	add_action( 'wpmudev_copier-copied_menu', 'copier_remap_ubermenu_id', 10, 2 );
+	add_action( 'psource_copier-copied_menu', 'copier_remap_ubermenu_id', 10, 2 );
 	function copier_remap_ubermenu_id( $args, $new_menu_id ) {
 		if ( $uber_options = get_option( 'ubermenu_main' ) ) {
 			$source_menu_id = $args['menu_id'];

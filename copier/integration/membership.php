@@ -39,6 +39,6 @@ if ( ! function_exists( 'copier_add_membership_caps' ) ) {
 		update_user_meta( $user_id, 'membership_permissions_updated', 'yes');
 		restore_current_blog();
 	}
-	add_action( 'wpmudev_copier-copy-options', 'copier_add_membership_caps', 10, 2 );
+	add_action( 'psource_copier-copy-options', 'copier_add_membership_caps', 10, 2 );
 
 }

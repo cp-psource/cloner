@@ -2,7 +2,7 @@
 
 
 if ( ! function_exists( 'copier_woocommerce_remap_termmeta' ) ) {
-	add_filter( 'wpmudev_copier-process_row', 'copier_woocommerce_remap_termmeta', 10, 3 );
+	add_filter( 'psource_copier-process_row', 'copier_woocommerce_remap_termmeta', 10, 3 );
 	function copier_woocommerce_remap_termmeta( $row, $dest_table, $source_blog_id ) {
 		global $wpdb;
 
@@ -25,7 +25,7 @@ if ( ! function_exists( 'copier_woocommerce_remap_termmeta' ) ) {
 }
 
 if ( ! function_exists( 'copier_woocommerce_save_mapped_terms' ) ) {
-	add_action( 'wpmudev_copier-copy-terms', 'copier_woocommerce_save_mapped_terms', 10, 4 );
+	add_action( 'psource_copier-copy-terms', 'copier_woocommerce_save_mapped_terms', 10, 4 );
 	function copier_woocommerce_save_mapped_terms( $user_id, $source_blog_id, $template, $mapped_terms ) {
 		if ( ! function_exists( 'WC' ) )
 			return;
@@ -35,14 +35,14 @@ if ( ! function_exists( 'copier_woocommerce_save_mapped_terms' ) ) {
 }
 
 if ( ! function_exists( 'copier_woocommerce_delete_transient' ) ) {
-	add_action( 'wpmudev_copier-copy-after_copying', 'copier_woocommerce_delete_transient' );
+	add_action( 'psource_copier-copy-after_copying', 'copier_woocommerce_delete_transient' );
 	function copier_woocommerce_delete_transient() {
 		delete_transient( 'copier_woocommerce_terms' );
 	}
 }
 
 if ( ! function_exists( 'copier_woocommerce_order_status' ) ) {
-	add_filter( 'wpmudev_copier_get_source_posts_args', 'copier_woocommerce_order_status' );
+	add_filter( 'psource_copier_get_source_posts_args', 'copier_woocommerce_order_status' );
 	/**
 	 * Add WooCommerce Order statuses to get_posts arguments so they are cloned too.
 	 *
@@ -76,7 +76,7 @@ if ( ! function_exists( 'copier_woocommerce_order_status' ) ) {
 
 
 if ( ! function_exists( 'copier_woocommerce_follow_up_email_status' ) ) {
-	add_filter( 'wpmudev_copier_get_source_posts_args', 'copier_woocommerce_follow_up_email_status' );
+	add_filter( 'psource_copier_get_source_posts_args', 'copier_woocommerce_follow_up_email_status' );
 	/**
 	 * Add WooCommerce Follow Up Email statuses to get_posts arguments so they are cloned too.
 	 *

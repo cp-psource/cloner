@@ -1,7 +1,7 @@
 <?php
 
-if ( ! defined( 'WPMUDEV_COPIER_LANG_DOMAIN' ) )
-    define( 'WPMUDEV_COPIER_LANG_DOMAIN', 'wpmudev-cloner' );
+if ( ! defined( 'PSOURCE_COPIER_LANG_DOMAIN' ) )
+    define( 'PSOURCE_COPIER_LANG_DOMAIN', 'psource-cloner' );
 
 include_once( dirname( __FILE__ ) . '/integration.php' );
 
@@ -343,7 +343,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
         if ( $option === false ) {
             return array(
                 'error' => true,
-                'message' => __( "Fehler beim Abrufen der Option", WPMUDEV_COPIER_LANG_DOMAIN )
+                'message' => __( "Fehler beim Abrufen der Option", PSOURCE_COPIER_LANG_DOMAIN )
             );
         }
 
@@ -367,13 +367,13 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
              * @param Array $option All options.
              * @param Array $template Only applies when using New Blog Templates. Includes the template attributes.
              */
-            do_action( "wpmudev_copier-copy-after_copying", $option['source_blog_id'], $option['user_id'], $option, $option['template'] );
+            do_action( "psource_copier-copy-after_copying", $option['source_blog_id'], $option['user_id'], $option, $option['template'] );
 
             delete_option( 'copier-pending' );
 
             return array(
                 'error' => true,
-                'message' => __( "Prozess abgeschlossen", WPMUDEV_COPIER_LANG_DOMAIN )
+                'message' => __( "Prozess abgeschlossen", PSOURCE_COPIER_LANG_DOMAIN )
             );
         }
 
@@ -394,7 +394,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 update_option( 'copier-pending', $option );
                 return array(
                     'error' => false,
-                    'message' => __( 'Keine Anhänge zum Kopieren', WPMUDEV_COPIER_LANG_DOMAIN )
+                    'message' => __( 'Keine Anhänge zum Kopieren', PSOURCE_COPIER_LANG_DOMAIN )
                 );
             }
 
@@ -430,7 +430,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 update_option( 'copier-pending', $option );
                 return array(
                     'error' => false,
-                    'message' => __( 'Keine zu kopierenden Menüs', WPMUDEV_COPIER_LANG_DOMAIN )
+                    'message' => __( 'Keine zu kopierenden Menüs', PSOURCE_COPIER_LANG_DOMAIN )
                 );
             }
 
@@ -465,7 +465,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
         if ( ! $copier ) {
             return array(
                 'error' => false,
-                'message' => sprintf( __( "Fehler beim Abrufen der Klasse (%s)", WPMUDEV_COPIER_LANG_DOMAIN ), $copy )
+                'message' => sprintf( __( "Fehler beim Abrufen der Klasse (%s)", PSOURCE_COPIER_LANG_DOMAIN ), $copy )
             );
         }
 
@@ -475,7 +475,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
          * @param String $copy The type of data that we are copying (post,page,attachment...)
          * @param Object $copier The copier class that we are going to use
          */
-        do_action( 'wpmudev_copier-before-copy', $copy, $copier );
+        do_action( 'psource_copier-before-copy', $copy, $copier );
 
         // Copy!
         $copier_result = $copier->copy();
@@ -498,12 +498,12 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 update_option( 'copier-pending', $option );
 
                 if ( $copy == 'cpts' )
-                    $message = __( 'Benutzerdefinierte Beitragstypen kopiert', WPMUDEV_COPIER_LANG_DOMAIN );
+                    $message = __( 'Benutzerdefinierte Beitragstypen kopiert', PSOURCE_COPIER_LANG_DOMAIN );
                 else
-                    $message = sprintf( __( '%s kopiert', WPMUDEV_COPIER_LANG_DOMAIN ), ucfirst( $copy ) );
+                    $message = sprintf( __( '%s kopiert', PSOURCE_COPIER_LANG_DOMAIN ), ucfirst( $copy ) );
             }
             elseif ( 'menus' == $copy ) {
-                $message = sprintf( __( '%s Menü kopiert', WPMUDEV_COPIER_LANG_DOMAIN ), $copier_result['menu_name'] );
+                $message = sprintf( __( '%s Menü kopiert', PSOURCE_COPIER_LANG_DOMAIN ), $copier_result['menu_name'] );
                 $menus_mapping_now = array( $args['menu_id'] => $copier_result['menu_id'] );
 
                 if ( isset( $option['menus_mapping'] ) ) {
@@ -523,10 +523,10 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 }
             }
             elseif ( 'attachment' != $copy ) {
-                $message = sprintf( __( '%s Kopiert', WPMUDEV_COPIER_LANG_DOMAIN ), ucfirst( $copy ) );
+                $message = sprintf( __( '%s Kopiert', PSOURCE_COPIER_LANG_DOMAIN ), ucfirst( $copy ) );
             }
             else {
-                $message = sprintf( __( '%s Kopiert', WPMUDEV_COPIER_LANG_DOMAIN ), basename( $copier_result['url'] ) );
+                $message = sprintf( __( '%s Kopiert', PSOURCE_COPIER_LANG_DOMAIN ), basename( $copier_result['url'] ) );
             }
         }
 
@@ -621,7 +621,7 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
          *
          * @param String $title
          */
-        $title = apply_filters( 'wpmudev_cloner_copy_page_title', __( 'Wir richten Deinen neuen Blog ein. Warte bitte einen Moment...', WPMUDEV_COPIER_LANG_DOMAIN ) );
+        $title = apply_filters( 'psource_cloner_copy_page_title', __( 'Wir richten Deinen neuen Blog ein. Warte bitte einen Moment...', PSOURCE_COPIER_LANG_DOMAIN ) );
 
         // In order to prevent JS broken responses, we'll use buffers unless the user specifies it in wp-config.php
         if ( copier_allow_buffered_response() ) {
@@ -647,7 +647,7 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
                 <meta name="viewport" content="width=device-width" />
                 <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
                 <script type="text/javascript" src="<?php echo includes_url(  'js/jquery/jquery.js' ); ?>"></script>
-                <title><?php _e( 'Neuer Blog-Setup', WPMUDEV_COPIER_LANG_DOMAIN ); ?></title>
+                <title><?php _e( 'Neuer Blog-Setup', PSOURCE_COPIER_LANG_DOMAIN ); ?></title>
                 <style type="text/css">
                     #steps {
                         max-height:300px;
@@ -677,24 +677,24 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
             <body class="wp-core-ui">
                 <h1><?php echo esc_html( $title ); ?> <span id="spinner" style="display:none;"><img style="width:15px;height:15px;" src="<?php echo admin_url( 'images/spinner.gif' ); ?>" /></span></h1>
                 <?php if ( $is_debugging ): ?>
-                    <p class="js_alert" style="color:#a00"><?php _e( 'Setze WP_DEBUG und WP_DEBUG_DISPLAY auf false, wenn dieser Bildschirm automatisch statt manuell funktionieren soll', WPMUDEV_COPIER_LANG_DOMAIN ); ?></p>
+                    <p class="js_alert" style="color:#a00"><?php _e( 'Setze WP_DEBUG und WP_DEBUG_DISPLAY auf false, wenn dieser Bildschirm automatisch statt manuell funktionieren soll', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
                 <?php endif; ?>
                 <?php if ( $is_xdebug_activated ): ?>
-                    <p class="js_alert" style="color:#a00"><?php _e( 'XDebug ist aktiviert. Deaktiviere es, wenn dieser Bildschirm nicht manuell, sondern automatisch funktionieren soll', WPMUDEV_COPIER_LANG_DOMAIN ); ?></p>
+                    <p class="js_alert" style="color:#a00"><?php _e( 'XDebug ist aktiviert. Deaktiviere es, wenn dieser Bildschirm nicht manuell, sondern automatisch funktionieren soll', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
                 <?php endif; ?>
-                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', WPMUDEV_COPIER_LANG_DOMAIN ); ?></p>
+                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
                 <ul id="steps">
                     <?php if ( ! empty( $message ) ): ?>
                         <li><?php echo $message; ?></li>
                     <?php endif; ?>
                 </ul>
-                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', WPMUDEV_COPIER_LANG_DOMAIN ); ?></p>
+                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
                 <?php if ( empty( $message ) ): ?>
-                    <a class="button button-primary next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Start', WPMUDEV_COPIER_LANG_DOMAIN ); ?></a>
+                    <a class="button button-primary next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Start', PSOURCE_COPIER_LANG_DOMAIN ); ?></a>
                 <?php elseif ( ! empty( $message ) && ! $error ): ?>
-                    <a class="button next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Nächster Schritt', WPMUDEV_COPIER_LANG_DOMAIN ); ?></a>
+                    <a class="button next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Nächster Schritt', PSOURCE_COPIER_LANG_DOMAIN ); ?></a>
                 <?php else: ?>
-                    <a class="button button-primary next_step_link" href="<?php echo esc_url( admin_url() ); ?>"><?php _e('Kehre zum Dashboard zurück', WPMUDEV_COPIER_LANG_DOMAIN ); ?></a>
+                    <a class="button button-primary next_step_link" href="<?php echo esc_url( admin_url() ); ?>"><?php _e('Kehre zum Dashboard zurück', PSOURCE_COPIER_LANG_DOMAIN ); ?></a>
                 <?php endif; ?>
 
 
@@ -739,7 +739,7 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
                                 }
                                 else {
                                     console.log(data);
-                                    copier_append_to_list( '<?php _e( "Ein Fehler ist aufgetreten", WPMUDEV_COPIER_LANG_DOMAIN ); ?>' );
+                                    copier_append_to_list( '<?php _e( "Ein Fehler ist aufgetreten", PSOURCE_COPIER_LANG_DOMAIN ); ?>' );
                                     copier_process_template();
                                 }
 
@@ -771,14 +771,14 @@ if ( ! function_exists( 'copier_allow_buffered_response' ) ) {
     /**
      * Check if errors while executing AJAX can be buffered.
      *
-     * The user can change this using WPMUDEV_COPIER_DISABLE_BUFFER constant in wp-config.php
+     * The user can change this using PSOURCE_COPIER_DISABLE_BUFFER constant in wp-config.php
      * If buffer is allowed, JSON answers will not appear broken if a warning/notice/error appear
      * during code execution.
      *
      * @return Boolean
      */
     function copier_allow_buffered_response() {
-        return ! ( defined( 'WPMUDEV_COPIER_DISABLE_BUFFER' ) && WPMUDEV_COPIER_DISABLE_BUFFER );
+        return ! ( defined( 'PSOURCE_COPIER_DISABLE_BUFFER' ) && PSOURCE_COPIER_DISABLE_BUFFER );
     }
 }
 
@@ -792,11 +792,11 @@ if ( ! function_exists( 'copier_process_ajax_template' ) ) {
     function copier_process_ajax_template() {
 
         if ( ! current_user_can( 'manage_options' ) )
-            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", WPMUDEV_COPIER_LANG_DOMAIN ) ) );
+            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", PSOURCE_COPIER_LANG_DOMAIN ) ) );
 
         $check_nonce = check_ajax_referer( 'copier_process_copy', 'security', false );
         if ( ! $check_nonce )
-            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", WPMUDEV_COPIER_LANG_DOMAIN ) ) );
+            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", PSOURCE_COPIER_LANG_DOMAIN ) ) );
 
         $option = get_option( 'copier-pending' );
 
@@ -816,7 +816,7 @@ if ( ! function_exists( 'copier_process_ajax_template' ) ) {
 if ( ! function_exists( 'copier_set_correct_wp_upload_dir' ) ) {
     function copier_set_correct_wp_upload_dir( $upload_dir ) {
         $wrong_UPLOADS = UPLOADS;
-        $UPLOADS = apply_filters( 'wpmudev_copier_UPLOADS_const', UPLOADBLOGSDIR . "/" . get_current_blog_id() . "/files/" );
+        $UPLOADS = apply_filters( 'psource_copier_UPLOADS_const', UPLOADBLOGSDIR . "/" . get_current_blog_id() . "/files/" );
 
         $_upload_dir = $upload_dir;
         foreach ( $upload_dir as $key => $value ) {
@@ -837,7 +837,7 @@ if ( ! function_exists( 'copier_set_correct_wp_get_attachment_url' ) ) {
         if ( defined( 'UPLOADS' ) && defined( 'UPLOADBLOGSDIR' ) ) {
             // Old uploads folder
             $wrong_UPLOADS = UPLOADS;
-            $UPLOADS = apply_filters( 'wpmudev_copier_UPLOADS_const', UPLOADBLOGSDIR . "/" . get_current_blog_id() . "/files/" );
+            $UPLOADS = apply_filters( 'psource_copier_UPLOADS_const', UPLOADBLOGSDIR . "/" . get_current_blog_id() . "/files/" );
 
             return str_replace( $wrong_UPLOADS, $UPLOADS, $url );
         }

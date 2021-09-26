@@ -11,5 +11,5 @@ if ( ! function_exists( 'copier_popover_remove_install_setting' ) ) {
 		$settings[] = "popover_installed";
 		return $settings;
 	}
-	add_filter( 'wpmudev_copier_exclude_settings', 'copier_popover_remove_install_setting', 10, 1 );
+	add_filter( 'psource_copier_exclude_settings', 'copier_popover_remove_install_setting', 10, 1 );
 }

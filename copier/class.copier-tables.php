@@ -37,7 +37,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
              *
              * @param Array $all_source_tables Source tables list.
              */
-            $all_source_tables = apply_filters( 'wpmudev_copier_copy_additional_tables', $all_source_tables );
+            $all_source_tables = apply_filters( 'psource_copier_copy_additional_tables', $all_source_tables );
 
             $wpdb->query( 'SET foreign_key_checks = 0' );
 
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
                     }
 
                     if ( ! empty( $wpdb->last_error ) ) {
-                        $error = new WP_Error( 'insertion_error', sprintf( __( 'Einfügefehler: %s', WPMUDEV_COPIER_LANG_DOMAIN ), $wpdb->last_error ) );
+                        $error = new WP_Error( 'insertion_error', sprintf( __( 'Einfügefehler: %s', PSOURCE_COPIER_LANG_DOMAIN ), $wpdb->last_error ) );
                         $wpdb->query("ROLLBACK;");
                         return $error;
                     }
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
              * @param String $dest_table Destination table name
              * @param Integer $source_blog_id Source Blog ID from where we are copying the table.
              */
-            do_action( 'wpmudev_copier-copying_table', $dest_table, $this->source_blog_id );
+            do_action( 'psource_copier-copying_table', $dest_table, $this->source_blog_id );
 
             $destination_prefix = $wpdb->prefix;
 
@@ -154,14 +154,14 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
                  * @param String $dest_table Destination table name.
                  * @param Integer $source_blog_id Source blog ID from where we are copying the table.
                  */
-                $row = apply_filters('wpmudev_copier-process_row', $row, $dest_table, $this->source_blog_id );
+                $row = apply_filters('psource_copier-process_row', $row, $dest_table, $this->source_blog_id );
 
                 if ( ! $row )
                     continue;
 
                 $wpdb->insert( $dest_table, $row );
                 if ( ! empty( $wpdb->last_error ) ) {
-                    return new WP_Error( 'copy_table', __( 'Fehler beim Kopieren der Tabelle: ' . $dest_table, WPMUDEV_COPIER_LANG_DOMAIN ) );
+                    return new WP_Error( 'copy_table', __( 'Fehler beim Kopieren der Tabelle: ' . $dest_table, PSOURCE_COPIER_LANG_DOMAIN ) );
                 }
             }
 
@@ -180,16 +180,16 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
              *
              * @param String $table Destination table name
              */
-            do_action( 'wpmudev_copier-clearing_table', $table );
+            do_action( 'psource_copier-clearing_table', $table );
 
             // Deprecated
             $where = apply_filters( 'blog_templates-clear_table_where', "", $table );
-            $where = apply_filters( 'wpmudev_copier-clear_table_where', "", $table );
+            $where = apply_filters( 'psource_copier-clear_table_where', "", $table );
 
             $wpdb->query( "DELETE FROM $table $where" );
 
             if ( $wpdb->last_error )
-                return new WP_Error( 'deletion_error', sprintf( __( 'Löschfehler: %1$s - Die Vorlage wurde nicht angewendet. (Neue Blog-Vorlagen - Beim Löschen von %2$s)', WPMUDEV_COPIER_LANG_DOMAIN ), $wpdb->last_error, $table ) );
+                return new WP_Error( 'deletion_error', sprintf( __( 'Löschfehler: %1$s - Die Vorlage wurde nicht angewendet. (Neue Blog-Vorlagen - Beim Löschen von %2$s)', PSOURCE_COPIER_LANG_DOMAIN ), $wpdb->last_error, $table ) );
 
             return true;
         }

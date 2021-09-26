@@ -11,5 +11,5 @@ if ( ! function_exists( 'copier_set_https_settings' ) ) {
 			update_option( 'wordpress-https_ssl_host', get_site_url( get_current_blog_id(), '', 'https' ) );
 
 	}
-	add_action( 'wpmudev_copier-copy-options', 'copier_set_https_settings' );
+	add_action( 'psource_copier-copy-options', 'copier_set_https_settings' );
 }

@@ -7,5 +7,5 @@ if ( ! function_exists( 'wds_exclude_cloner_settings' ) ) {
 		return $exclude_settings;
 	}
 
-	add_filter( 'wpmudev_copier_exclude_settings', 'wds_exclude_cloner_settings' );
+	add_filter( 'psource_copier_exclude_settings', 'wds_exclude_cloner_settings' );
 }

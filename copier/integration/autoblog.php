@@ -80,6 +80,6 @@ if ( ! function_exists( 'copier_copy_autoblog_feeds' ) ) {
 		}
 
 	}
-	add_action( 'wpmudev_copier-copy-options', 'copier_copy_autoblog_feeds', 10, 1 );
+	add_action( 'psource_copier-copy-options', 'copier_copy_autoblog_feeds', 10, 1 );
 
 }

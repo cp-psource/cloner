@@ -1,18 +1,18 @@
 <?php
 
-add_action( 'wpmudev_cloner_clone_site_screen', 'cloner_multi_domains_tweak_destination_meta_box' );
+add_action( 'psource_cloner_clone_site_screen', 'cloner_multi_domains_tweak_destination_meta_box' );
 function cloner_multi_domains_tweak_destination_meta_box() {
     if ( ! class_exists( 'multi_domain' ) )
         return;
     remove_meta_box( 'cloner-destination', 'cloner', 'normal' );
-    add_meta_box( 'cloner-destination', __( 'Ziel', WPMUDEV_CLONER_LANG_DOMAIN), 'cloner_multi_domains_destination_meta_box', 'cloner', 'normal' );
+    add_meta_box( 'cloner-destination', __( 'Ziel', PSOURCE_CLONER_LANG_DOMAIN), 'cloner_multi_domains_destination_meta_box', 'cloner', 'normal' );
 }
 
 function cloner_multi_domains_destination_meta_box() {
-    include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'integration/views/multi-domains-destination-meta-box.php' );
+    include_once( PSOURCE_CLONER_PLUGIN_DIR . 'integration/views/multi-domains-destination-meta-box.php' );
 }
 
-add_filter( 'wpmudev_cloner_pre_clone_actions_switch_default', 'cloner_multi_domains_process_clone_site_form', 10, 6 );
+add_filter( 'psource_cloner_pre_clone_actions_switch_default', 'cloner_multi_domains_process_clone_site_form', 10, 6 );
 
 /**
  * @param $result
@@ -31,20 +31,20 @@ function cloner_multi_domains_process_clone_site_form( $result, $selection, $blo
         $blog = ! empty( $_REQUEST['blog_create'] ) ? $_REQUEST['blog_create'] : false;
 
         if ( ! $blog ) {
-            return new WP_Error( 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', WPMUDEV_CLONER_LANG_DOMAIN ) );
+            return new WP_Error( 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', PSOURCE_CLONER_LANG_DOMAIN ) );
         }
 
         $domain = $_REQUEST['domain'];
 
         if ( empty( $domain ) ) {
-            return new WP_Error( 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', WPMUDEV_CLONER_LANG_DOMAIN ) );
+            return new WP_Error( 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', PSOURCE_CLONER_LANG_DOMAIN ) );
         }
 
         $all_domains = get_site_option( 'md_domains' );
         $search_domain_results = wp_list_filter( $all_domains, array( 'domain_name' => $domain ) );
 
         if ( empty( $search_domain_results ) ) {
-            return new WP_Error( 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', WPMUDEV_CLONER_LANG_DOMAIN ) );
+            return new WP_Error( 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', PSOURCE_CLONER_LANG_DOMAIN ) );
         }
 
 
@@ -53,7 +53,7 @@ function cloner_multi_domains_process_clone_site_form( $result, $selection, $blo
             $subdomain = strtolower( $blog );
 
         if ( empty( $subdomain ) ) {
-            return new WP_Error( 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', WPMUDEV_CLONER_LANG_DOMAIN ) );
+            return new WP_Error( 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', PSOURCE_CLONER_LANG_DOMAIN ) );
         }
 
         $full_address = '';
@@ -71,7 +71,7 @@ function cloner_multi_domains_process_clone_site_form( $result, $selection, $blo
         }
 
         if ( ! empty( $blog_exists ) ) {
-            return new WP_Error( 'blog_already_exists', __( 'Der Blog existiert bereits', WPMUDEV_CLONER_LANG_DOMAIN ) );
+            return new WP_Error( 'blog_already_exists', __( 'Der Blog existiert bereits', PSOURCE_CLONER_LANG_DOMAIN ) );
         }
 
 

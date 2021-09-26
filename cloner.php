@@ -7,7 +7,7 @@ Author: WMS N@W
 Author URI: https://n3rds.work
 Version: 1.8.3
 Network: true
-Text Domain: wpmudev-cloner
+Text Domain: psource-cloner
 Domain Path: lang
 */
 
@@ -37,7 +37,7 @@ $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'cloner' 
 );
 
-class WPMUDEV_Cloner {
+class PSOURCE_Cloner {
 
 	private static $instance = null;
 
@@ -63,73 +63,73 @@ class WPMUDEV_Cloner {
 		add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_link' ), 40 );
 
 		if ( is_network_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-			require_once( WPMUDEV_CLONER_PLUGIN_DIR . 'admin/cloner-admin-settings.php' );
-			add_action( 'plugins_loaded', array( 'WPMUDEV_Cloner_Admin_Settings', 'get_instance' ) );
+			require_once( PSOURCE_CLONER_PLUGIN_DIR . 'admin/cloner-admin-settings.php' );
+			add_action( 'plugins_loaded', array( 'PSOURCE_Cloner_Admin_Settings', 'get_instance' ) );
 
-			require_once( WPMUDEV_CLONER_PLUGIN_DIR . 'admin/cloner-admin-clone-site.php' );
-			add_action( 'plugins_loaded', array( 'WPMUDEV_Cloner_Admin_Clone_Site', 'get_instance' ) );
+			require_once( PSOURCE_CLONER_PLUGIN_DIR . 'admin/cloner-admin-clone-site.php' );
+			add_action( 'plugins_loaded', array( 'PSOURCE_Cloner_Admin_Clone_Site', 'get_instance' ) );
 		}
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
-			require_once( WPMUDEV_CLONER_PLUGIN_DIR . 'admin/ajax.php' );
+			require_once( PSOURCE_CLONER_PLUGIN_DIR . 'admin/ajax.php' );
 
 	}
 
 	
 
 	private function set_constants() {
-		if ( ! defined( 'WPMUDEV_CLONER_PLUGIN_DIR' ) )
-			define( 'WPMUDEV_CLONER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+		if ( ! defined( 'PSOURCE_CLONER_PLUGIN_DIR' ) )
+			define( 'PSOURCE_CLONER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-		if ( ! defined( 'WPMUDEV_CLONER_PLUGIN_URL' ) )
-			define( 'WPMUDEV_CLONER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+		if ( ! defined( 'PSOURCE_CLONER_PLUGIN_URL' ) )
+			define( 'PSOURCE_CLONER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-		if ( ! defined( 'WPMUDEV_CLONER_LANG_DOMAIN' ) )
-			define( 'WPMUDEV_CLONER_LANG_DOMAIN', 'wpmudev-cloner' );
+		if ( ! defined( 'PSOURCE_CLONER_LANG_DOMAIN' ) )
+			define( 'PSOURCE_CLONER_LANG_DOMAIN', 'psource-cloner' );
 
 		 //Define the same language domain for the copier classes.
-		if ( ! defined( 'WPMUDEV_COPIER_LANG_DOMAIN' ) )
-			define( 'WPMUDEV_COPIER_LANG_DOMAIN', 'wpmudev-cloner' );
+		if ( ! defined( 'PSOURCE_COPIER_LANG_DOMAIN' ) )
+			define( 'PSOURCE_COPIER_LANG_DOMAIN', 'psource-cloner' );
 
-		if ( ! defined( 'WPMUDEV_CLONER_VERSION' ) )
-			define( 'WPMUDEV_CLONER_VERSION', '1.8.3' );
+		if ( ! defined( 'PSOURCE_CLONER_VERSION' ) )
+			define( 'PSOURCE_CLONER_VERSION', '1.8.3' );
 	}
 
 	private function includes() {
-		include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'integration/integration.php' );
-		include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'copier/copier.php' );
-		include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'copier-filters.php' );
-		include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'helpers/general.php' );
-		include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'helpers/settings.php' );
+		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'integration/integration.php' );
+		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'copier/copier.php' );
+		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'copier-filters.php' );
+		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'helpers/general.php' );
+		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'helpers/settings.php' );
 
 		//load dashboard notice
-		global $wpmudev_notices;
-		$wpmudev_notices[] = array( 'id'=> 910773, 'name'=> 'Cloner', 'screens' => array( 'admin_page_clone_site-network', 'settings_page_cloner-network' ) );
-		//include_once( WPMUDEV_CLONER_PLUGIN_DIR . 'externals/wpmudev-dash-notification.php' );
+		global $psource_notices;
+		$psource_notices[] = array( 'id'=> 910773, 'name'=> 'Cloner', 'screens' => array( 'admin_page_clone_site-network', 'settings_page_cloner-network' ) );
+		//include_once( PSOURCE_CLONER_PLUGIN_DIR . 'externals/psource-dash-notification.php' );
 	}
 
 	public function load_plugin_textdomain() {
-		$domain = WPMUDEV_CLONER_LANG_DOMAIN;
+		$domain = PSOURCE_CLONER_LANG_DOMAIN;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, false, basename( WPMUDEV_CLONER_PLUGIN_DIR ) . '/lang/' );
+		load_plugin_textdomain( $domain, false, basename( PSOURCE_CLONER_PLUGIN_DIR ) . '/lang/' );
 	}
 
 	public function init_plugin() {
 		if ( is_network_admin() && isset( $_GET['cloner_dismiss_install_notice'] ) ) {
-			update_site_option( 'wpmudev_cloner_installation_notice_done', true );
+			update_site_option( 'psource_cloner_installation_notice_done', true );
 		}
 	}
 
 	public function display_installation_admin_notice() {
 
-		if ( is_super_admin() && ! get_site_option( 'wpmudev_cloner_installation_notice_done' ) ) {
+		if ( is_super_admin() && ! get_site_option( 'psource_cloner_installation_notice_done' ) ) {
 			$dismiss_url = add_query_arg( 'cloner_dismiss_install_notice', 'true' );
 			?>
 				<div class="updated">
-					<p class="alignleft"><?php printf( __( 'Cloner wurde erfolgreich installiert und kann in <a href="%s">Einstellungen &raquo; Cloner</a> konfiguriert werden', WPMUDEV_CLONER_LANG_DOMAIN ), network_admin_url( 'settings.php?page=cloner' ) ); ?></p>
-					<p class="alignright"><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button-secondary"><?php _e( 'Verwerfen', WPMUDEV_CLONER_LANG_DOMAIN ); ?></a></p>
+					<p class="alignleft"><?php printf( __( 'Cloner wurde erfolgreich installiert und kann in <a href="%s">Einstellungen &raquo; Cloner</a> konfiguriert werden', PSOURCE_CLONER_LANG_DOMAIN ), network_admin_url( 'settings.php?page=cloner' ) ); ?></p>
+					<p class="alignright"><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button-secondary"><?php _e( 'Verwerfen', PSOURCE_CLONER_LANG_DOMAIN ); ?></a></p>
 					<div class="clear"></div>
 				</div>
 			<?php
@@ -150,7 +150,7 @@ class WPMUDEV_Cloner {
 			return $option;
 		}
 
-		$settings = wpmudev_cloner_get_settings();
+		$settings = psource_cloner_get_settings();
 
 		$to_copy = $option['to_copy'];
 		foreach ( $to_copy as $to_copy_option => $value ) {
@@ -163,18 +163,18 @@ class WPMUDEV_Cloner {
 
 
 	public function maybe_upgrade() {
-		$current_version_saved = get_site_option( 'wpmudev_cloner_version', '1.1' );
+		$current_version_saved = get_site_option( 'psource_cloner_version', '1.1' );
 
-		if ( WPMUDEV_CLONER_VERSION === $current_version_saved)
+		if ( PSOURCE_CLONER_VERSION === $current_version_saved)
 			return;
 
 		if ( version_compare( $current_version_saved, '1.2', '<' ) ) {
-			$settings = wpmudev_cloner_get_settings();
+			$settings = psource_cloner_get_settings();
 			$settings['to_copy'][] = 'cpts';
-			wpmudev_cloner_update_settings( $settings );
+			psource_cloner_update_settings( $settings );
 		}
 
-		update_site_option( 'wpmudev_cloner_version', WPMUDEV_CLONER_VERSION );
+		update_site_option( 'psource_cloner_version', PSOURCE_CLONER_VERSION );
 	}
 
 	/**
@@ -204,15 +204,15 @@ class WPMUDEV_Cloner {
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'site-name',
 			'id'     => 'clone-site',
-			'title'  => __( 'Webseite klonen', WPMUDEV_CLONER_LANG_DOMAIN ),
+			'title'  => __( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ),
 			'href'   => $url,
 		) );
 	}
 
 }
 
-function wpmudev_cloner() {
-	return WPMUDEV_Cloner::get_instance();
+function psource_cloner() {
+	return PSOURCE_Cloner::get_instance();
 }
 
-wpmudev_cloner();
+psource_cloner();

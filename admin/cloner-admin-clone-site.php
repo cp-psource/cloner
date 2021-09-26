@@ -3,7 +3,7 @@
 /**
  * Based on Tom McFarlin's Plugin Boilerplate https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate
  */
-class WPMUDEV_Cloner_Admin_Clone_Site {
+class PSOURCE_Cloner_Admin_Clone_Site {
 
 	/**
 	 * Instance of this class.
@@ -41,8 +41,8 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_javascript' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_css' ) );
 
-		if ( ! defined( 'WPMUDEV_CLONER_ASSETS_URL' ) )
-			define( 'WPMUDEV_CLONER_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets' );
+		if ( ! defined( 'PSOURCE_CLONER_ASSETS_URL' ) )
+			define( 'PSOURCE_CLONER_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets' );
 
 	}
 
@@ -68,7 +68,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 	public function add_site_action_link( $links, $blog_id ) {
 		if ( cloner_is_blog_clonable( $blog_id ) ) {
 			$clone_url = add_query_arg( 'blog_id', $blog_id, network_admin_url( 'index.php?page=clone_site' ) );
-			$links['clone'] = '<span class="clone"><a href="' . $clone_url . '">' . __( 'Klonen', WPMUDEV_CLONER_LANG_DOMAIN ) . '</a></span>';	
+			$links['clone'] = '<span class="clone"><a href="' . $clone_url . '">' . __( 'Klonen', PSOURCE_CLONER_LANG_DOMAIN ) . '</a></span>';	
 		}
 		
 
@@ -78,14 +78,14 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 	function add_javascript() {
 		if ( get_current_screen()->id == $this->plugin_screen_hook_suffix . '-network' ) {
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
-			wp_enqueue_script( 'jquery-multi-select-css', WPMUDEV_CLONER_PLUGIN_URL . 'admin/assets/jquery-multi-select/js/jquery-multi-select.js', array( 'jquery' ), WPMUDEV_CLONER_VERSION );
+			wp_enqueue_script( 'jquery-multi-select-css', PSOURCE_CLONER_PLUGIN_URL . 'admin/assets/jquery-multi-select/js/jquery-multi-select.js', array( 'jquery' ), PSOURCE_CLONER_VERSION );
 			wp_enqueue_script('post');
 		}
 	}
 
 	function add_css() {
 		if ( get_current_screen()->id == $this->plugin_screen_hook_suffix . '-network' )
-			wp_enqueue_style( 'jquery-multi-select-css', WPMUDEV_CLONER_PLUGIN_URL . 'admin/assets/jquery-multi-select/css/multi-select.css', array(), WPMUDEV_CLONER_VERSION );
+			wp_enqueue_style( 'jquery-multi-select-css', PSOURCE_CLONER_PLUGIN_URL . 'admin/assets/jquery-multi-select/css/multi-select.css', array(), PSOURCE_CLONER_VERSION );
 	}
 
 
@@ -98,8 +98,8 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 
 		$this->plugin_screen_hook_suffix = add_submenu_page( 
 			null, 
-			__( 'Webseite klonen', WPMUDEV_CLONER_LANG_DOMAIN ), 
-			__( 'Webseite klonen', WPMUDEV_CLONER_LANG_DOMAIN ), 
+			__( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ), 
+			__( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ), 
 			'manage_network', 
 			'clone_site', 
 			array( &$this, 'display_admin_page' ) 
@@ -117,7 +117,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 
 		if ( ! $blog_details ) {
 			$message = sprintf( 
-				__( 'Der Blog, den Du kopieren möchtest, ist nicht vorhanden. <a href="%s">Versuche es mit einem anderen</a>.', WPMUDEV_CLONER_LANG_DOMAIN ), 
+				__( 'Der Blog, den Du kopieren möchtest, ist nicht vorhanden. <a href="%s">Versuche es mit einem anderen</a>.', PSOURCE_CLONER_LANG_DOMAIN ), 
 				network_admin_url( 'sites.php' ) 
 			); 
 			wp_die( $message );
@@ -125,7 +125,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 
 		if ( ! cloner_is_blog_clonable( $blog_id ) ) {
 			$message = sprintf( 
-				__( 'Die Webseite, die Du kopieren möchtest (%s), kann nicht geklont werden [ID %d]. <a href="%s">Versuche es mit einer anderen</a>.', WPMUDEV_CLONER_LANG_DOMAIN ), 
+				__( 'Die Webseite, die Du kopieren möchtest (%s), kann nicht geklont werden [ID %d]. <a href="%s">Versuche es mit einer anderen</a>.', PSOURCE_CLONER_LANG_DOMAIN ), 
 				$blog_details->blogname, 
 				$blog_id,
 				network_admin_url( 'sites.php' )
@@ -179,13 +179,13 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 			)
 		);
 
-		add_meta_box( 'cloner-destination', __( 'Ziel', WPMUDEV_CLONER_LANG_DOMAIN), array( $this, 'destination_meta_box' ), 'cloner', 'normal' );
-		add_meta_box( 'cloner-options', __( 'Optionen', WPMUDEV_CLONER_LANG_DOMAIN), array( $this, 'options_meta_box' ), 'cloner', 'normal' );
+		add_meta_box( 'cloner-destination', __( 'Ziel', PSOURCE_CLONER_LANG_DOMAIN), array( $this, 'destination_meta_box' ), 'cloner', 'normal' );
+		add_meta_box( 'cloner-options', __( 'Optionen', PSOURCE_CLONER_LANG_DOMAIN), array( $this, 'options_meta_box' ), 'cloner', 'normal' );
 
 		if ( ! empty( $additional_tables ) && $blog_id == 1 )
-			add_meta_box( 'cloner-advanced', __( 'Erweiterte Optionen', WPMUDEV_CLONER_LANG_DOMAIN), array( $this, 'advanced_options_meta_box' ), 'cloner', 'normal' );
+			add_meta_box( 'cloner-advanced', __( 'Erweiterte Optionen', PSOURCE_CLONER_LANG_DOMAIN), array( $this, 'advanced_options_meta_box' ), 'cloner', 'normal' );
 
-		do_action( 'wpmudev_cloner_clone_site_screen' );
+		do_action( 'psource_cloner_clone_site_screen' );
 		include_once( 'views/clone-site.php' );
 	}
 
@@ -231,7 +231,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 
 		// Does the source blog exists?
 		if ( ! $blog_id || empty( $blog_details ) ) {
-			add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog, den Du kopieren möchtest, existiert nicht', WPMUDEV_CLONER_LANG_DOMAIN ) );
+			add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog, den Du kopieren möchtest, existiert nicht', PSOURCE_CLONER_LANG_DOMAIN ) );
 			return;
 		}
 
@@ -254,7 +254,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 				$blog = ! empty( $_REQUEST['blog_create'] ) ? $_REQUEST['blog_create'] : false;
 
 				if ( ! $blog ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', WPMUDEV_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', PSOURCE_CLONER_LANG_DOMAIN ) );
 					return;
 				}
 
@@ -263,14 +263,14 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 					$domain = strtolower( $blog );
 
 				if ( empty( $domain ) ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', WPMUDEV_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', PSOURCE_CLONER_LANG_DOMAIN ) );
 					return;
 				}
 
 				$destination_blog_details = get_blog_details( $domain );
 
 				if ( ! empty( $destination_blog_details ) ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog existiert bereits', WPMUDEV_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog existiert bereits', PSOURCE_CLONER_LANG_DOMAIN ) );
 					return;
 				}
 
@@ -279,7 +279,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 				}
 				
 
-				do_action( 'wpmudev_cloner_pre_clone_actions', $selection, $blog_id, $args, false );
+				do_action( 'psource_cloner_pre_clone_actions', $selection, $blog_id, $args, false );
 				$errors = get_settings_errors( 'cloner' );
 				if ( ! empty( $errors ) )
 					return;
@@ -313,19 +313,19 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 				}
 
 				if ( ! $destination_blog_id ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', WPMUDEV_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', PSOURCE_CLONER_LANG_DOMAIN ) );
 					return;
 				}
 
 				if ( $destination_blog_id == $blog_id ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Du kannst einen Blog nicht in sich selbst kopieren', WPMUDEV_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Du kannst einen Blog nicht in sich selbst kopieren', PSOURCE_CLONER_LANG_DOMAIN ) );
 					return;
 				}
 
 				$destination_blog_details = get_blog_details( $destination_blog_id );
 
 				if ( empty( $destination_blog_details ) ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', WPMUDEV_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', PSOURCE_CLONER_LANG_DOMAIN ) );
 					return;
 				}
 
@@ -341,7 +341,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 		        	$domain = str_replace( '/', '', $destination_blog_details->path );
 		        }
 
-		        do_action( 'wpmudev_cloner_pre_clone_actions', $selection, $blog_id, $args, $destination_blog_id );
+		        do_action( 'psource_cloner_pre_clone_actions', $selection, $blog_id, $args, $destination_blog_id );
 				$errors = get_settings_errors( 'cloner' );
 				if ( ! empty( $errors ) )
 					return;
@@ -376,7 +376,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
 				break;
 			}
 			default: {
-                $result = apply_filters( 'wpmudev_cloner_pre_clone_actions_switch_default', false, $selection, $blog_title_selection, $new_blog_title, $blog_id, $blog_details );
+                $result = apply_filters( 'psource_cloner_pre_clone_actions_switch_default', false, $selection, $blog_title_selection, $new_blog_title, $blog_id, $blog_details );
 
                 if ( is_wp_error( $result ) ) {
                     add_settings_error('cloner', $result->get_error_code(), $result->get_error_message());
@@ -384,7 +384,7 @@ class WPMUDEV_Cloner_Admin_Clone_Site {
                 }
 
                 if ( ! $result )  {
-                    add_settings_error('cloner', 'cloner_error', __( 'Unbekannter Fehler', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                    add_settings_error('cloner', 'cloner_error', __( 'Unbekannter Fehler', PSOURCE_COPIER_LANG_DOMAIN ) );
                     return;
                 }
 

@@ -21,7 +21,7 @@ if ( ! class_exists( 'Site_Copier_Posts' ) ) {
 			$post_types = $wpdb->get_col( "SELECT DISTINCT post_type FROM $wpdb->posts WHERE post_type NOT IN $exclude_post_types" );
 			restore_current_blog();
 
-			$post_types = apply_filters( 'wpmudev_copier_copy_post_types', $post_types, $source_blog_id, $args, $user_id, $template );
+			$post_types = apply_filters( 'psource_copier_copy_post_types', $post_types, $source_blog_id, $args, $user_id, $template );
 
 			$this->log( 'Copying Post Types:' );
 			$this->log( $post_types );
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Site_Copier_Posts' ) ) {
 				$this->type = $post_types;
 			}
 
-			add_action( 'wpmudev_copier-copied-posts', array( $this, 'copy_network_tables_opts' ), 10, 5 );
+			add_action( 'psource_copier-copied-posts', array( $this, 'copy_network_tables_opts' ), 10, 5 );
 
 		}
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Site_Copier_Posts' ) ) {
 					if ( ! is_wp_error( $new_module_id ) && ! empty( $module_meta ) ){
 						foreach ( $module_meta as $key => $meta ) {
 
-							$meta = apply_filters( 'wpmudev_copier_copy_hustle_meta', $meta );
+							$meta = apply_filters( 'psource_copier_copy_hustle_meta', $meta );
 							if ( $meta ){
 								$wpdb->insert( $hustle_modules_meta_table, 
 									array(

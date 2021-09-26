@@ -12,7 +12,7 @@ if ( ! class_exists( 'Site_Copier_Pages' ) ) {
 		public function __construct( $source_blog_id, $template, $args = array(), $user_id = 0 ) {
 			parent::__construct( $source_blog_id, $template, $args, $user_id );
 			$this->type = 'page';
-			add_filter( 'wpmudev_copier_get_source_posts_args', array( $this, 'set_get_source_posts_args' ) );
+			add_filter( 'psource_copier_get_source_posts_args', array( $this, 'set_get_source_posts_args' ) );
 		}
 
 		public function get_default_args() {

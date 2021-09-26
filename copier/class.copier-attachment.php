@@ -92,13 +92,13 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
                     $thumbnail_id = $this->args['attachment_id'];
 
                 if ( ! $thumbnail_id )
-                    return new WP_Error( 'attachment_error', __( 'Falscher Anhang angegeben', WPMUDEV_COPIER_LANG_DOMAIN) );
+                    return new WP_Error( 'attachment_error', __( 'Falscher Anhang angegeben', PSOURCE_COPIER_LANG_DOMAIN) );
 
                 if ( ! is_string( $thumbnail_id ) )
                     $source_attachment = get_blog_post( $this->source_blog_id, $thumbnail_id );
 
                 if ( ! $source_attachment )
-                    return new WP_Error( 'attachment_error', sprintf( __( 'Anhang (ID=%d) ist im Quellblog nicht vorhanden', WPMUDEV_COPIER_LANG_DOMAIN), $thumbnail_id ) );
+                    return new WP_Error( 'attachment_error', sprintf( __( 'Anhang (ID=%d) ist im Quellblog nicht vorhanden', PSOURCE_COPIER_LANG_DOMAIN), $thumbnail_id ) );
 
                 // Setting the new attachment properties
                 $new_attachment = (array)$source_attachment;
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
             if ( $info = wp_check_filetype( $upload['file'] ) )
                 $new_attachment['post_mime_type'] = $info['type'];
             else
-                return new WP_Error( 'filetype_error', __( 'Dateitypfehler: ' . $url, WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'filetype_error', __( 'Dateitypfehler: ' . $url, PSOURCE_COPIER_LANG_DOMAIN ) );
 
             $new_attachment['guid'] = $upload['url'];
 
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
              * @param Integer $source_attachment_id Source Attachment ID
              * @param Integer $source_blog_id The source blog ID
              */
-            do_action( 'wpmudev_copier_copy_attachment', $new_attachment_id, $source_attachment, $this->source_blog_id );
+            do_action( 'psource_copier_copy_attachment', $new_attachment_id, $source_attachment, $this->source_blog_id );
 
             if ( empty( $thumbnail_id ) ) {
                 // We don't need to do anything else if we did not pass the source attachment ID
@@ -196,7 +196,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
                  *
                  * @param Boolean. Default True.
                  */
-                && apply_filters( 'wpmudev_copier_change_attachments_urls', true )
+                && apply_filters( 'psource_copier_change_attachments_urls', true )
             ) {
                 // We first need the source and destination images URLs
                 if ( ! empty( $source_attachment ) ) {
@@ -336,7 +336,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
                  * @param Integer $new_attachment_id The new Attachment ID in the blog that we have copied the attachment
                  * @param Integer $source_attachment->ID The source attachment ID in the source blog
                  */
-                do_action( 'wpmudev_copier_replace_post_gallery', $_post['ID'], $new_attachment_id, $source_attachment->ID );
+                do_action( 'psource_copier_replace_post_gallery', $_post['ID'], $new_attachment_id, $source_attachment->ID );
             }
 
             
@@ -370,31 +370,31 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
             // request failed
             if ( ! $headers ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', sprintf( __('Der Remote-Server hat nicht auf die Datei geantwortet: %s', WPMUDEV_COPIER_LANG_DOMAIN ), $url ) );
+                return new WP_Error( 'import_file_error', sprintf( __('Der Remote-Server hat nicht auf die Datei geantwortet: %s', PSOURCE_COPIER_LANG_DOMAIN ), $url ) );
             }
 
             // make sure the fetch was successful
             if ( $headers['response'] != '200' ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', sprintf( __( 'Der Remote-Server hat eine Fehlerantwort zurückgegeben %1$d %2$s - %3$s', WPMUDEV_COPIER_LANG_DOMAIN ), esc_html( $headers['response'] ), get_status_header_desc($headers['response'] ), $url ) );
+                return new WP_Error( 'import_file_error', sprintf( __( 'Der Remote-Server hat eine Fehlerantwort zurückgegeben %1$d %2$s - %3$s', PSOURCE_COPIER_LANG_DOMAIN ), esc_html( $headers['response'] ), get_status_header_desc($headers['response'] ), $url ) );
             }
 
             $filesize = filesize( $upload['file'] );
 
             if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', __('Die Remote-Datei hat eine falsche Größe', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'import_file_error', __('Die Remote-Datei hat eine falsche Größe', PSOURCE_COPIER_LANG_DOMAIN ) );
             }
 
             if ( 0 == $filesize ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', __('Datei mit der Größe Null heruntergeladen', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'import_file_error', __('Datei mit der Größe Null heruntergeladen', PSOURCE_COPIER_LANG_DOMAIN ) );
             }
 
-            $max_size = (int) apply_filters( 'wpmudev_copier_attachment_size_limit', 0 );
+            $max_size = (int) apply_filters( 'psource_copier_attachment_size_limit', 0 );
             if ( ! empty( $max_size ) && $filesize > $max_size ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', sprintf(__('Remote-Datei ist zu groß, Limit ist %s', WPMUDEV_COPIER_LANG_DOMAIN ), size_format($max_size) ) );
+                return new WP_Error( 'import_file_error', sprintf(__('Remote-Datei ist zu groß, Limit ist %s', PSOURCE_COPIER_LANG_DOMAIN ), size_format($max_size) ) );
             }
 
             return $upload;

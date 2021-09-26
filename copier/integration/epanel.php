@@ -8,5 +8,5 @@ if ( ! function_exists( 'copier_exclude_epanel_temp_path' ) ) {
 		$exclude[] = 'et_images_temp_folder';
 		return $exclude;
 	}
-	add_filter( 'wpmudev_copier_exclude_settings', 'copier_exclude_epanel_temp_path');
+	add_filter( 'psource_copier_exclude_settings', 'copier_exclude_epanel_temp_path');
 }

@@ -29,7 +29,7 @@ if ( ! class_exists( 'Site_Copier_Menus' ) ) {
         public function copy() {
 
             if ( $this->args['menu_id'] === false )
-                return new WP_Error( 'wrong_menu', __( 'Keine zu kopierenden Menüs', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'wrong_menu', __( 'Keine zu kopierenden Menüs', PSOURCE_COPIER_LANG_DOMAIN ) );
 
             // Deprecated
             do_action( 'blog_templates-copying_menu', $this->source_blog_id, get_current_blog_id() );
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Site_Copier_Menus' ) ) {
              * @param Integer $current_blog_id Blog ID where we are copying the menu
              * @param Integer $menu_id. The key of the array got from wp_get_nav_menus()
              */
-            do_action( 'wpmudev_copier-copying_menu', $this->source_blog_id, get_current_blog_id(), $this->args['menu_id'] );
+            do_action( 'psource_copier-copying_menu', $this->source_blog_id, get_current_blog_id(), $this->args['menu_id'] );
 
             // Get the source menus and their menu items
             switch_to_blog( $this->source_blog_id );
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Site_Copier_Menus' ) ) {
             restore_current_blog();
 
             if ( ! $source_menu )
-                return new WP_Error( 'wrong_menu', sprintf( __( 'Beim Kopieren des Menüs ist ein Fehler aufgetreten. ID: ', WPMUDEV_COPIER_LANG_DOMAIN ), $this->args['menu_id'] ) );
+                return new WP_Error( 'wrong_menu', sprintf( __( 'Beim Kopieren des Menüs ist ein Fehler aufgetreten. ID: ', PSOURCE_COPIER_LANG_DOMAIN ), $this->args['menu_id'] ) );
             
             // Array that saves relationships to remap parents later
             $menu_items_remap = array();
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Site_Copier_Menus' ) ) {
             $new_menu_id = wp_update_nav_menu_object( 0, $menu_args );
 
             if ( ! $new_menu_id || is_wp_error( $new_menu_id ) )
-                return new WP_Error( 'insert_menu_error', sprintf( __( 'Beim Kopieren des Menüs ist ein Fehler aufgetreten. ID: ', WPMUDEV_COPIER_LANG_DOMAIN ), $this->args['menu_id'] ) );
+                return new WP_Error( 'insert_menu_error', sprintf( __( 'Beim Kopieren des Menüs ist ein Fehler aufgetreten. ID: ', PSOURCE_COPIER_LANG_DOMAIN ), $this->args['menu_id'] ) );
 
             add_filter( 'wp_insert_post_data', array( $this, 'change_insert_post_ID' ), 10 ,2 );
 
@@ -210,7 +210,7 @@ if ( ! class_exists( 'Site_Copier_Menus' ) ) {
              * @param array $args Array of arguments passed to this class
              * @param integer $new_menu_id ID of the new menu
              */
-            do_action( 'wpmudev_copier-copied_menu', $this->args, $new_menu_id, $this->source_blog_id );
+            do_action( 'psource_copier-copied_menu', $this->args, $new_menu_id, $this->source_blog_id );
 
 
             return array(

@@ -7,7 +7,7 @@ nocache_headers();
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
-    <title><?php _e( 'Aktion bestätigen', WPMUDEV_COPIER_LANG_DOMAIN ); ?></title>
+    <title><?php _e( 'Aktion bestätigen', PSOURCE_COPIER_LANG_DOMAIN ); ?></title>
     <?php
     	wp_admin_css( 'install', true );
     	wp_admin_css( 'ie', true );
@@ -33,11 +33,11 @@ nocache_headers();
 </head>
 <body class="wp-core-ui">
 	<form method="post" action="<?php echo network_admin_url( 'index.php?page=clone_site' ); ?>">
-        <h1><?php _e( 'Achtung!', WPMUDEV_COPIER_LANG_DOMAIN ); ?> <span class="dashicons dashicons-megaphone"></span></h1>
+        <h1><?php _e( 'Achtung!', PSOURCE_COPIER_LANG_DOMAIN ); ?> <span class="dashicons dashicons-megaphone"></span></h1>
 		<p>
 			<?php 
 				printf( 
-					__( 'Du hast eine URL <u>ausgewählt, die bereits vorhanden ist</u>. Wenn Du "Weiter" wählst, werden alle vorhandenen Webseiten-Inhalte und -Einstellungen in %s <u>vollständig überschrieben</u> mit Inhalten und Einstellungen aus %s. Diese Änderung ist dauerhaft und kann nicht rückgängig gemacht werden. Sei also vorsichtig. ', WPMUDEV_CLONER_LANG_DOMAIN ),
+					__( 'Du hast eine URL <u>ausgewählt, die bereits vorhanden ist</u>. Wenn Du "Weiter" wählst, werden alle vorhandenen Webseiten-Inhalte und -Einstellungen in %s <u>vollständig überschrieben</u> mit Inhalten und Einstellungen aus %s. Diese Änderung ist dauerhaft und kann nicht rückgängig gemacht werden. Sei also vorsichtig. ', PSOURCE_CLONER_LANG_DOMAIN ),
 					'<strong>' . get_site_url( $destination_blog_details->blog_id ) . '</strong>', 
 					'<strong>' . get_site_url( $blog_details->blog_id ) . '</strong>' 
 				); 
@@ -65,8 +65,8 @@ nocache_headers();
 		<?php endif; ?>
 		<?php wp_nonce_field( 'clone-site-' . $blog_id, '_wpnonce_clone-site' ); ?>
 
-		<?php submit_button( __( 'Weiter', WPMUDEV_CLONER_LANG_DOMAIN ), 'primary', 'confirm', false ); ?>
-		<a class="button-secondary" href="<?php echo esc_url( $back_url ); ?>"><?php _e( 'Nein, bitte ich möchte zurück', WPMUDEV_CLONER_LANG_DOMAIN ); ?></a>
+		<?php submit_button( __( 'Weiter', PSOURCE_CLONER_LANG_DOMAIN ), 'primary', 'confirm', false ); ?>
+		<a class="button-secondary" href="<?php echo esc_url( $back_url ); ?>"><?php _e( 'Nein, bitte ich möchte zurück', PSOURCE_CLONER_LANG_DOMAIN ); ?></a>
 
 	</form>
 </body>

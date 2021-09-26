@@ -18,11 +18,11 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
          */
         public function copy( $post_id = false ) {
 
-            $settings = wpmudev_cloner_get_settings();
+            $settings = psource_cloner_get_settings();
 
             if ( $this->type == false ) {
                 $this->log( 'class.copier-post-types. Keine benutzerdefinierten Beitragstypen zum Kopieren' );
-                return new WP_Error( 'wrong_post_type', __( 'Keine benutzerdefinierten Beitragstypen zum Kopieren', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'wrong_post_type', __( 'Keine benutzerdefinierten Beitragstypen zum Kopieren', PSOURCE_COPIER_LANG_DOMAIN ) );
             }
 
 
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
              * 
              * @param Boolean $remove_hooks Remove hooks if set to true (true by default)
              */
-            $remove_hooks = apply_filters( 'wpmudev_copier_remove_insert_post_filters', true );
+            $remove_hooks = apply_filters( 'psource_copier_remove_insert_post_filters', true );
 
             if ( $remove_hooks ) {
                 add_filter( 'wp_mail', array( $this, 'disable_wp_mail' ), 1 );    
@@ -63,7 +63,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
              *
              * @param Array. WP_Query attributes to perform the search
              */
-            $args = apply_filters( 'wpmudev_copier_get_source_posts_args', array(
+            $args = apply_filters( 'psource_copier_get_source_posts_args', array(
                 'posts_per_page' => -1,
                 'ignore_sticky_posts' => true,
                 'post_status' => array( 'publish', 'pending', 'draft', 'future', 'private', 'inherit' ),
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
 
             if ( empty( $all_posts ) ) {
                 $this->log( 'class.copier-post-types. Keine Beiträge zum Kopieren' );
-                return new WP_Error( 'empty_posts', __( 'Keine Beiträge zum Kopieren', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'empty_posts', __( 'Keine Beiträge zum Kopieren', PSOURCE_COPIER_LANG_DOMAIN ) );
             }
 
             // Array that relations the source posts with the destination posts
@@ -139,7 +139,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
                  * @param Integer $user_id Post Author.
                  * @param Array $template Only applies when using New Blog Templates. Includes the template attributes
                  */
-                do_action( 'wpmudev_copier-copy-post', $this->source_blog_id, $post->ID, $new_post, $this->user_id, $this->template, $post );
+                do_action( 'psource_copier-copy-post', $this->source_blog_id, $post->ID, $new_post, $this->user_id, $this->template, $post );
 
                 if ( $remove_hooks ) {
                     $action = "new_to_" . $new_post['post_status'];
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
                 * Replace links and/or images urls in content
                 */
                 $types_to_replace =  apply_filters(
-                    'wpmudev_copier_types-to-replace',
+                    'psource_copier_types-to-replace',
                     implode( '|', $settings['to_replace'] ),
                     $post,
                     $this
@@ -177,7 +177,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
                  * @param Integer $user_id Post Author.
                  * @param Array $template Only applies when using New Blog Templates. Includes the template attributes
                  */
-                $new_post = apply_filters( 'wpmudev_copier_insert_new_post', $new_post, $this->source_blog_id, $post->ID, $this->user_id, $this->template );
+                $new_post = apply_filters( 'psource_copier_insert_new_post', $new_post, $this->source_blog_id, $post->ID, $this->user_id, $this->template );
                 
                 $new_post_id = @wp_insert_post( $new_post );
 
@@ -222,7 +222,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
              * @param Integer $user_id Post Author.
              * @param Array $template Only applies when using New Blog Templates. Includes the template attributes
              */
-            do_action( 'wpmudev_copier-copied-posts', $this->source_blog_id, $posts_mapping, $this->user_id, $this->template, $this->type );
+            do_action( 'psource_copier-copied-posts', $this->source_blog_id, $posts_mapping, $this->user_id, $this->template, $this->type );
 
             if ( $remove_hooks ) {
                 remove_filter( 'wp_mail', array( $this, 'disable_wp_mail' ), 1 );
@@ -290,7 +290,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
              *
              * @param Array. WP_Query attributes to perform the search.
              */
-            $args = apply_filters( 'wpmudev_copier_get_delete_posts_args', array(
+            $args = apply_filters( 'psource_copier_get_delete_posts_args', array(
                 'posts_per_page' => -1,
                 'ignore_sticky_posts' => true,
                 'post_status' => 'any',

@@ -38,7 +38,7 @@ if ( ! class_exists( 'Site_Copier_Users' ) ) {
                  * @param Integer $user_id Administrator Blog ID.
                  * @param Array $template Only applies when using New Blog Templates. Includes the template attributes.
                  */
-                $user = apply_filters( 'wpmudev_copier-copy-user_entry', $user, $this->user_id, $this->template );
+                $user = apply_filters( 'psource_copier-copy-user_entry', $user, $this->user_id, $this->template );
                 if ( $user->ID == $this->user_id ) {
                     add_user_to_blog( get_current_blog_id(), $user->ID, 'administrator' );
                 }
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Site_Copier_Users' ) ) {
              * @param Integer $source_blog_id Source Blog ID from where we are copying the users.
              * @param Array $template Only applies when using New Blog Templates. Includes the template attributes.
              */
-            do_action( 'wpmudev_copier-copy-users', $this->user_id, $this->source_blog_id, $this->template );
+            do_action( 'psource_copier-copy-users', $this->user_id, $this->source_blog_id, $this->template );
 
             return true;
     	}

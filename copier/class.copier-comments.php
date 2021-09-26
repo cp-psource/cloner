@@ -44,7 +44,7 @@ if ( ! class_exists( 'Site_Copier_Comments' ) ) {
              * @param Array $source_comments Source comments and their attributes.
              * @param Integer $source_blog_id Source Blog ID.
              */
-            $source_comments = apply_filters( 'wpmudev_copier_source_comments', $source_comments, $this->source_blog_id );
+            $source_comments = apply_filters( 'psource_copier_source_comments', $source_comments, $this->source_blog_id );
 
             // This array saves the relationships between the old comments and the new
             $comments_remap = array();

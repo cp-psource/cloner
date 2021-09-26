@@ -48,7 +48,7 @@ if ( ! class_exists( 'Site_Copier_Terms' ) ) {
 			$post_types = $wpdb->get_col( "SELECT DISTINCT post_type FROM $wpdb->posts WHERE post_type NOT IN $exclude_post_types" );
 
 			//Filter with our custom post types
-			$source_posts_ids = get_posts( apply_filters( 'wpmudev_copier_get_source_posts_args', array(
+			$source_posts_ids = get_posts( apply_filters( 'psource_copier_get_source_posts_args', array(
 				'ignore_sticky_posts' => true,
 				'posts_per_page' => -1,
 				'post_type' => $post_types,
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Site_Copier_Terms' ) ) {
 	        if ( isset( $taxonomies['nav_menu'] ) )
 				unset( $taxonomies['nav_menu'] );
 
-			$taxonomies = apply_filters( 'wpmudev_copier_copy_taxonomies', $taxonomies, $this );
+			$taxonomies = apply_filters( 'psource_copier_copy_taxonomies', $taxonomies, $this );
 			$source_terms = get_terms( $taxonomies, array( 'orderby' => 'id', 'get' => 'all' ) );
 
 			$this->log( 'class.copier-terms.php. Taxonomies to copy:' );
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Site_Copier_Terms' ) ) {
              * @param Integer $source_blog_id Source Blog ID from where we are copying the links.
              * @param Array $template Only applies when using New Blog Templates. Includes the template attributes.
              */
-			do_action( 'wpmudev_copier-copy-links', $this->user_id, $this->source_blog_id, $this->template );
+			do_action( 'psource_copier-copy-links', $this->user_id, $this->source_blog_id, $this->template );
 			
 		
 			// Insert the terms
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Site_Copier_Terms' ) ) {
 				);
 
 				$new_term = $this->wp_insert_term( $term->name, $term->taxonomy, $term_args );
-				do_action( 'wpmudev_copier_insert_term', $new_term, $term );
+				do_action( 'psource_copier_insert_term', $new_term, $term );
 				
 				if ( is_wp_error( $new_term ) ) {
 					// Usually Uncategorized cannot be deleted, we need to check if it's already in the destination blog and map it
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Site_Copier_Terms' ) ) {
              * @param Array $template Only applies when using New Blog Templates. Includes the template attributes.
 			 * @param Array $mapped_terms Relationship between source term IDs and new term IDs
              */
-			do_action( 'wpmudev_copier-copy-terms', $this->user_id, $this->source_blog_id, $this->template, $mapped_terms );
+			do_action( 'psource_copier-copy-terms', $this->user_id, $this->source_blog_id, $this->template, $mapped_terms );
 
 			// If there's a links widget in the sidebar we may need to set the new category ID
 	        $widget_links_settings = get_blog_option( $this->source_blog_id, 'widget_links' );

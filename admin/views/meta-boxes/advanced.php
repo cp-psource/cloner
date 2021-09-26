@@ -1,4 +1,4 @@
-<p><?php _e( 'Du hast Dich entschieden, den Hauptblog zu klonen. Bitte <strong>wähle die Tabellen aus, die geklont werden sollen</strong>. Beachte dass reine Netzwerktabellen viel Platz und viel Zeit zum Klonen beanspruchen können.', WPMUDEV_CLONER_LANG_DOMAIN ); ?></p>
+<p><?php _e( 'Du hast Dich entschieden, den Hauptblog zu klonen. Bitte <strong>wähle die Tabellen aus, die geklont werden sollen</strong>. Beachte dass reine Netzwerktabellen viel Platz und viel Zeit zum Klonen beanspruchen können.', PSOURCE_CLONER_LANG_DOMAIN ); ?></p>
 <div id="additional-tables" style="display:none">
 	<select id="additional-tables-selector">
 		<?php foreach ( $additional_tables as $table ): ?>

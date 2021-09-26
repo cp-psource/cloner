@@ -16,7 +16,7 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
             wp_cache_delete( 'notoptions', 'options' );
             wp_cache_delete( 'alloptions', 'options' );
 
-            do_action( 'wpmudev_copier_before_copy_settings', $this->source_blog_id );
+            do_action( 'psource_copier_before_copy_settings', $this->source_blog_id );
 
             $source_blog_user_roles = $wpdb->get_blog_prefix( $this->source_blog_id ) . 'user_roles';
     		$exclude_settings = array(
@@ -44,10 +44,10 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
              *
              * @param Array $exclude_settings Exclude Settings list.
              */
-            $exclude_settings = apply_filters( 'wpmudev_copier_exclude_settings', $exclude_settings );
+            $exclude_settings = apply_filters( 'psource_copier_exclude_settings', $exclude_settings );
 
             $the_options = $wpdb->get_col( "SELECT option_name FROM $wpdb->options" );
-            $the_options = apply_filters( 'wpmudev_copier_delete_options', $the_options );
+            $the_options = apply_filters( 'psource_copier_delete_options', $the_options );
             $this->log( 'class.copier-post-types.php. Deleting ' . count( $the_options ) . ' options' );
             foreach ( $the_options as $option_name ) {
                 if ( ! in_array( $option_name, $exclude_settings ) ) {
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
 
             if ( $wpdb->last_error ) {
                 $this->log( 'class.copier-settings.php. Error copying settings: ' . $wpdb->last_error );
-                return new WP_Error( 'settings_error', __( 'Fehler beim Kopieren der Einstellungen', WPMUDEV_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'settings_error', __( 'Fehler beim Kopieren der Einstellungen', PSOURCE_COPIER_LANG_DOMAIN ) );
             }
 
             if ( ! function_exists( 'get_plugins' ) ) {
@@ -112,7 +112,7 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
                  * @param Array $row Setting row prepared for database.
                  * @param Integer $source_blog_id Source Blog ID.
                  */
-                $row = apply_filters( 'wpmudev_copier-copy-options_row', $row, $this->source_blog_id );
+                $row = apply_filters( 'psource_copier-copy-options_row', $row, $this->source_blog_id );
 
                 if ( ! $row )
                     continue; // Prevent empty row insertion
@@ -161,7 +161,7 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
                 if ( 
                     apply_filters( 'nbt_change_attachments_urls', true ) // Deprecated
                     /** This filter is documented in class.copier-attachment.php */
-                    && apply_filters( 'wpmudev_copier_change_attachments_urls', true )
+                    && apply_filters( 'psource_copier_change_attachments_urls', true )
                 )
                     array_walk_recursive( $mods, array( &$this, 'set_theme_mods_url' ), array( $this->source_blog_id, get_current_blog_id() ) );
                 
@@ -198,7 +198,7 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
              * @param Integer $user_id User ID that created the blog.
              * @param Array $template Only applies when using New Blog Templates. Includes the template attributes
              */
-            do_action( 'wpmudev_copier-copy-options', $this->source_blog_id, $this->user_id, $this->template );
+            do_action( 'psource_copier-copy-options', $this->source_blog_id, $this->user_id, $this->template );
 
             $this->log( 'Einstellungen kopieren. Verstrichene Zeit: ' . ( $this->_get_microtime() - $start_time ) );
             return true;

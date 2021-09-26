@@ -6,7 +6,7 @@
  *
  * @param $source_blog_id
  */
-function wpmudev_copier_revslider_options( $source_blog_id ) {
+function psource_copier_revslider_options( $source_blog_id ) {
 	if ( ! is_plugin_active( 'revslider/revslider.php' ) ) {
 		return;
 	}
@@ -16,4 +16,4 @@ function wpmudev_copier_revslider_options( $source_blog_id ) {
 		update_option( 'revslider_table_version', '1.0.0' );
 	}
 }
-add_action( 'wpmudev_copier-copy-options', 'wpmudev_copier_revslider_options' );
+add_action( 'psource_copier-copy-options', 'psource_copier_revslider_options' );
