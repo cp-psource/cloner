@@ -5,7 +5,7 @@ Plugin URI: https://n3rds.work/piestingtal_source/cloner-klone-inhalte-in-multis
 Description: Klone Webseiten in einer Multisite-Netzwerkinstallation
 Author: WMS N@W
 Author URI: https://n3rds.work
-Version: 1.8.3
+Version: 1.8.4
 Network: true
 Text Domain: psource-cloner
 Domain Path: lang
@@ -14,7 +14,7 @@ Domain Path: lang
 /*
 Copyright 2016-2021 WMS N@W (https://n3rds.work)
 Author – DerN3rd
-Contributors – Vladislav Bailovic, Ignacio Cruz (igmoweb)
+
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 – GPLv2) as published by
@@ -30,7 +30,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-require 'externals/psource-plugin-update/plugin-update-checker.php';
+require 'psource/psource-plugin-update/plugin-update-checker.php';
 $MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://n3rds.work//wp-update-server/?action=get_metadata&slug=cloner', 
 	__FILE__, 
@@ -92,7 +92,7 @@ class PSOURCE_Cloner {
 			define( 'PSOURCE_COPIER_LANG_DOMAIN', 'psource-cloner' );
 
 		if ( ! defined( 'PSOURCE_CLONER_VERSION' ) )
-			define( 'PSOURCE_CLONER_VERSION', '1.8.3' );
+			define( 'PSOURCE_CLONER_VERSION', '1.8.4' );
 	}
 
 	private function includes() {
