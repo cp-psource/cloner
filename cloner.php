@@ -1,18 +1,18 @@
 <?php
 /*
 Plugin Name: Cloner
-Plugin URI: https://n3rds.work/piestingtal_source/cloner-klone-inhalte-in-multisite-per-mausklick/
+Plugin URI: https://n3rds.work/cp_psource/cloner-klone-webseiten-in-multisite/
 Description: Klone Webseiten in einer Multisite-Netzwerkinstallation
 Author: WMS N@W
 Author URI: https://n3rds.work
-Version: 1.8.4
+Version: 1.8.5
 Network: true
 Text Domain: psource-cloner
 Domain Path: lang
 */
 
 /*
-Copyright 2016-2021 WMS N@W (https://n3rds.work)
+Copyright 2016-2023 WMS N@W (https://n3rds.work)
 Author – DerN3rd
 
 
@@ -30,8 +30,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-require 'psource/psource-plugin-update/plugin-update-checker.php';
-$MyUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+require 'psource/psource-plugin-update/psource-plugin-updater.php';
+use Psource\PluginUpdateChecker\v5\PucFactory;
+$MyUpdateChecker = PucFactory::buildUpdateChecker(
 	'https://n3rds.work//wp-update-server/?action=get_metadata&slug=cloner', 
 	__FILE__, 
 	'cloner' 
@@ -92,7 +93,7 @@ class PSOURCE_Cloner {
 			define( 'PSOURCE_COPIER_LANG_DOMAIN', 'psource-cloner' );
 
 		if ( ! defined( 'PSOURCE_CLONER_VERSION' ) )
-			define( 'PSOURCE_CLONER_VERSION', '1.8.4' );
+			define( 'PSOURCE_CLONER_VERSION', '1.8.5' );
 	}
 
 	private function includes() {
