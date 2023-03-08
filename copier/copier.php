@@ -237,7 +237,7 @@ if ( ! function_exists( 'copier_get_menus_ids' ) ) {
 
 if ( ! function_exists( 'copier_get_additional_tables' ) ) {
     /**
-     * Get a list of WordPress DB tables in a blog (not the default ones)
+     * Get a list of ClassicPress DB tables in a blog (not the default ones)
      *
      * @param Integer $blog_id
      * @return Array of tables attributes:
@@ -343,7 +343,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
         if ( $option === false ) {
             return array(
                 'error' => true,
-                'message' => __( "Fehler beim Abrufen der Option", PSOURCE_COPIER_LANG_DOMAIN )
+                'message' => __( "Fehler beim Abrufen der Option", 'psource-cloner' )
             );
         }
 
@@ -373,7 +373,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
 
             return array(
                 'error' => true,
-                'message' => __( "Prozess abgeschlossen", PSOURCE_COPIER_LANG_DOMAIN )
+                'message' => __( "Prozess abgeschlossen", 'psource-cloner' )
             );
         }
 
@@ -394,7 +394,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 update_option( 'copier-pending', $option );
                 return array(
                     'error' => false,
-                    'message' => __( 'Keine Anhänge zum Kopieren', PSOURCE_COPIER_LANG_DOMAIN )
+                    'message' => __( 'Keine Anhänge zum Kopieren', 'psource-cloner' )
                 );
             }
 
@@ -430,7 +430,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 update_option( 'copier-pending', $option );
                 return array(
                     'error' => false,
-                    'message' => __( 'Keine zu kopierenden Menüs', PSOURCE_COPIER_LANG_DOMAIN )
+                    'message' => __( 'Keine zu kopierenden Menüs', 'psource-cloner' )
                 );
             }
 
@@ -465,7 +465,7 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
         if ( ! $copier ) {
             return array(
                 'error' => false,
-                'message' => sprintf( __( "Fehler beim Abrufen der Klasse (%s)", PSOURCE_COPIER_LANG_DOMAIN ), $copy )
+                'message' => sprintf( __( "Fehler beim Abrufen der Klasse (%s)", 'psource-cloner' ), $copy )
             );
         }
 
@@ -498,12 +498,12 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 update_option( 'copier-pending', $option );
 
                 if ( $copy == 'cpts' )
-                    $message = __( 'Benutzerdefinierte Beitragstypen kopiert', PSOURCE_COPIER_LANG_DOMAIN );
+                    $message = __( 'Benutzerdefinierte Beitragstypen kopiert', 'psource-cloner' );
                 else
-                    $message = sprintf( __( '%s kopiert', PSOURCE_COPIER_LANG_DOMAIN ), ucfirst( $copy ) );
+                    $message = sprintf( __( '%s kopiert', 'psource-cloner' ), ucfirst( $copy ) );
             }
             elseif ( 'menus' == $copy ) {
-                $message = sprintf( __( '%s Menü kopiert', PSOURCE_COPIER_LANG_DOMAIN ), $copier_result['menu_name'] );
+                $message = sprintf( __( '%s Menü kopiert', 'psource-cloner' ), $copier_result['menu_name'] );
                 $menus_mapping_now = array( $args['menu_id'] => $copier_result['menu_id'] );
 
                 if ( isset( $option['menus_mapping'] ) ) {
@@ -523,10 +523,10 @@ if ( ! function_exists( 'copier_process_copy' ) ) {
                 }
             }
             elseif ( 'attachment' != $copy ) {
-                $message = sprintf( __( '%s Kopiert', PSOURCE_COPIER_LANG_DOMAIN ), ucfirst( $copy ) );
+                $message = sprintf( __( '%s Kopiert', 'psource-cloner' ), ucfirst( $copy ) );
             }
             else {
-                $message = sprintf( __( '%s Kopiert', PSOURCE_COPIER_LANG_DOMAIN ), basename( $copier_result['url'] ) );
+                $message = sprintf( __( '%s Kopiert', 'psource-cloner' ), basename( $copier_result['url'] ) );
             }
         }
 
@@ -621,7 +621,7 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
          *
          * @param String $title
          */
-        $title = apply_filters( 'psource_cloner_copy_page_title', __( 'Wir richten Deinen neuen Blog ein. Warte bitte einen Moment...', PSOURCE_COPIER_LANG_DOMAIN ) );
+        $title = apply_filters( 'psource_cloner_copy_page_title', __( 'Wir richten Deinen neuen Blog ein. Warte bitte einen Moment...', 'psource-cloner' ) );
 
         // In order to prevent JS broken responses, we'll use buffers unless the user specifies it in wp-config.php
         if ( copier_allow_buffered_response() ) {
@@ -647,7 +647,7 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
                 <meta name="viewport" content="width=device-width" />
                 <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
                 <script type="text/javascript" src="<?php echo includes_url(  'js/jquery/jquery.js' ); ?>"></script>
-                <title><?php _e( 'Neuer Blog-Setup', PSOURCE_COPIER_LANG_DOMAIN ); ?></title>
+                <title><?php _e( 'Neuer Blog-Setup', 'psource-cloner' ); ?></title>
                 <style type="text/css">
                     #steps {
                         max-height:300px;
@@ -677,24 +677,24 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
             <body class="wp-core-ui">
                 <h1><?php echo esc_html( $title ); ?> <span id="spinner" style="display:none;"><img style="width:15px;height:15px;" src="<?php echo admin_url( 'images/spinner.gif' ); ?>" /></span></h1>
                 <?php if ( $is_debugging ): ?>
-                    <p class="js_alert" style="color:#a00"><?php _e( 'Setze WP_DEBUG und WP_DEBUG_DISPLAY auf false, wenn dieser Bildschirm automatisch statt manuell funktionieren soll', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
+                    <p class="js_alert" style="color:#a00"><?php _e( 'Setze WP_DEBUG und WP_DEBUG_DISPLAY auf false, wenn dieser Bildschirm automatisch statt manuell funktionieren soll', 'psource-cloner' ); ?></p>
                 <?php endif; ?>
                 <?php if ( $is_xdebug_activated ): ?>
-                    <p class="js_alert" style="color:#a00"><?php _e( 'XDebug ist aktiviert. Deaktiviere es, wenn dieser Bildschirm nicht manuell, sondern automatisch funktionieren soll', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
+                    <p class="js_alert" style="color:#a00"><?php _e( 'XDebug ist aktiviert. Deaktiviere es, wenn dieser Bildschirm nicht manuell, sondern automatisch funktionieren soll', 'psource-cloner' ); ?></p>
                 <?php endif; ?>
-                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
+                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', 'psource-cloner' ); ?></p>
                 <ul id="steps">
                     <?php if ( ! empty( $message ) ): ?>
                         <li><?php echo $message; ?></li>
                     <?php endif; ?>
                 </ul>
-                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', PSOURCE_COPIER_LANG_DOMAIN ); ?></p>
+                <p class="redirect" style="display:none"><?php _e( 'Weiterleitung zum Dashboard...', 'psource-cloner' ); ?></p>
                 <?php if ( empty( $message ) ): ?>
-                    <a class="button button-primary next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Start', PSOURCE_COPIER_LANG_DOMAIN ); ?></a>
+                    <a class="button button-primary next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Start', 'psource-cloner' ); ?></a>
                 <?php elseif ( ! empty( $message ) && ! $error ): ?>
-                    <a class="button next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Nächster Schritt', PSOURCE_COPIER_LANG_DOMAIN ); ?></a>
+                    <a class="button next_step_link" href="<?php echo esc_url( add_query_arg( 'copier_step', 'true', admin_url() ) ); ?>"><?php _e('Nächster Schritt', 'psource-cloner' ); ?></a>
                 <?php else: ?>
-                    <a class="button button-primary next_step_link" href="<?php echo esc_url( admin_url() ); ?>"><?php _e('Kehre zum Dashboard zurück', PSOURCE_COPIER_LANG_DOMAIN ); ?></a>
+                    <a class="button button-primary next_step_link" href="<?php echo esc_url( admin_url() ); ?>"><?php _e('Kehre zum Dashboard zurück', 'psource-cloner' ); ?></a>
                 <?php endif; ?>
 
 
@@ -739,7 +739,7 @@ if ( ! function_exists( 'copier_maybe_copy' ) ) {
                                 }
                                 else {
                                     console.log(data);
-                                    copier_append_to_list( '<?php _e( "Ein Fehler ist aufgetreten", PSOURCE_COPIER_LANG_DOMAIN ); ?>' );
+                                    copier_append_to_list( '<?php _e( "Ein Fehler ist aufgetreten", 'psource-cloner' ); ?>' );
                                     copier_process_template();
                                 }
 
@@ -792,11 +792,11 @@ if ( ! function_exists( 'copier_process_ajax_template' ) ) {
     function copier_process_ajax_template() {
 
         if ( ! current_user_can( 'manage_options' ) )
-            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", PSOURCE_COPIER_LANG_DOMAIN ) ) );
+            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", 'psource-cloner' ) ) );
 
         $check_nonce = check_ajax_referer( 'copier_process_copy', 'security', false );
         if ( ! $check_nonce )
-            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", PSOURCE_COPIER_LANG_DOMAIN ) ) );
+            wp_send_json_error( array( 'message' => __( "Sicherheitsfehler", 'psource-cloner' ) ) );
 
         $option = get_option( 'copier-pending' );
 

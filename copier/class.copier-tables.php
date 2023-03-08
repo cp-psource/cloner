@@ -33,7 +33,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
              * Filter the source tables list.
              *
              * This list includes all the source tables that we are going to copy except
-             * for the native WordPress tables.
+             * for the native ClassicPress tables.
              *
              * @param Array $all_source_tables Source tables list.
              */
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
                     }
 
                     if ( ! empty( $wpdb->last_error ) ) {
-                        $error = new WP_Error( 'insertion_error', sprintf( __( 'Einfügefehler: %s', PSOURCE_COPIER_LANG_DOMAIN ), $wpdb->last_error ) );
+                        $error = new WP_Error( 'insertion_error', sprintf( __( 'Einfügefehler: %s', 'psource-cloner' ), $wpdb->last_error ) );
                         $wpdb->query("ROLLBACK;");
                         return $error;
                     }
@@ -161,7 +161,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
 
                 $wpdb->insert( $dest_table, $row );
                 if ( ! empty( $wpdb->last_error ) ) {
-                    return new WP_Error( 'copy_table', __( 'Fehler beim Kopieren der Tabelle: ' . $dest_table, PSOURCE_COPIER_LANG_DOMAIN ) );
+                    return new WP_Error( 'copy_table', __( 'Fehler beim Kopieren der Tabelle: ' . $dest_table, 'psource-cloner' ) );
                 }
             }
 
@@ -189,7 +189,7 @@ if ( ! class_exists( 'Site_Copier_Tables' ) ) {
             $wpdb->query( "DELETE FROM $table $where" );
 
             if ( $wpdb->last_error )
-                return new WP_Error( 'deletion_error', sprintf( __( 'Löschfehler: %1$s - Die Vorlage wurde nicht angewendet. (Neue Blog-Vorlagen - Beim Löschen von %2$s)', PSOURCE_COPIER_LANG_DOMAIN ), $wpdb->last_error, $table ) );
+                return new WP_Error( 'deletion_error', sprintf( __( 'Löschfehler: %1$s - Die Vorlage wurde nicht angewendet. (Neue Blog-Vorlagen - Beim Löschen von %2$s)', 'psource-cloner' ), $wpdb->last_error, $table ) );
 
             return true;
         }

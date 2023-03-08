@@ -22,7 +22,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
 
             if ( $this->type == false ) {
                 $this->log( 'class.copier-post-types. Keine benutzerdefinierten Beitragstypen zum Kopieren' );
-                return new WP_Error( 'wrong_post_type', __( 'Keine benutzerdefinierten Beitragstypen zum Kopieren', PSOURCE_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'wrong_post_type', __( 'Keine benutzerdefinierten Beitragstypen zum Kopieren', 'psource-cloner' ) );
             }
 
 
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Site_Copier_Post_Types' ) ) {
 
             if ( empty( $all_posts ) ) {
                 $this->log( 'class.copier-post-types. Keine Beiträge zum Kopieren' );
-                return new WP_Error( 'empty_posts', __( 'Keine Beiträge zum Kopieren', PSOURCE_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'empty_posts', __( 'Keine Beiträge zum Kopieren', 'psource-cloner' ) );
             }
 
             // Array that relations the source posts with the destination posts

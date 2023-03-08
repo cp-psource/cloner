@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Based on Tom McFarlin's Plugin Boilerplate https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate
+ * Based on Tom McFarlin's Plugin Boilerplate https://github.com/tommcfarlin/ClassicPress-Plugin-Boilerplate
  */
 class PSOURCE_Cloner_Admin_Clone_Site {
 
@@ -90,7 +90,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 
 
 	/**
-	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
+	 * Register the administration menu for this plugin into the ClassicPress Dashboard menu.
 	 *
 	 * @since    1.0.0
 	 */
@@ -292,7 +292,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 				if ( ! $destination_blog_id ) {
 					// try to check the blog name
 					$blog_name = isset( $_REQUEST['blog_replace_autocomplete'] ) ? $_REQUEST['blog_replace_autocomplete'] : '';
-					/// Hack for WordPress bug (https://core.trac.wordpress.org/ticket/34450)
+					/// Hack for ClassicPress bug (https://core.trac.wordpress.org/ticket/34450)
 					if ( is_subdomain_install() ) {
 						$temp_domain = $current_site->domain;
 						$current_site->domain = preg_replace( '|^www\.|', '', $current_site->domain );
@@ -384,7 +384,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
                 }
 
                 if ( ! $result )  {
-                    add_settings_error('cloner', 'cloner_error', __( 'Unbekannter Fehler', PSOURCE_COPIER_LANG_DOMAIN ) );
+                    add_settings_error('cloner', 'cloner_error', __( 'Unbekannter Fehler', 'psource-cloner' ) );
                     return;
                 }
 

@@ -7,7 +7,7 @@ nocache_headers();
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
-    <title><?php _e( 'Aktion bestätigen', PSOURCE_COPIER_LANG_DOMAIN ); ?></title>
+    <title><?php _e( 'Aktion bestätigen', 'psource-cloner' ); ?></title>
     <?php
     	wp_admin_css( 'install', true );
     	wp_admin_css( 'ie', true );
@@ -33,7 +33,7 @@ nocache_headers();
 </head>
 <body class="wp-core-ui">
 	<form method="post" action="<?php echo network_admin_url( 'index.php?page=clone_site' ); ?>">
-        <h1><?php _e( 'Achtung!', PSOURCE_COPIER_LANG_DOMAIN ); ?> <span class="dashicons dashicons-megaphone"></span></h1>
+        <h1><?php _e( 'Achtung!', 'psource-cloner' ); ?> <span class="dashicons dashicons-megaphone"></span></h1>
 		<p>
 			<?php 
 				printf( 

@@ -9,7 +9,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Cloner kopiert jede WordPress-Webseite in Deinem Multisite-Netzwerk und verschiebt sie mit einem Klick auf eine beliebige URL im selben Netzwerk.
+Cloner kopiert jede ClassicPress-Webseite in Deinem Multisite-Netzwerk und verschiebt sie mit einem Klick auf eine beliebige URL im selben Netzwerk.
 
 == Description ==
 
@@ -33,7 +33,7 @@ Perfekt für die Verwaltung von Live-Webseiten.
 
 = Finde mehr Piestingtal.Source =
 
-Wirf einen Blick in unser [PSOURCE Sortiment](https://n3rds.work/psource_kategorien/psource-plugins/) und hole noch mehr aus Deinem WordPress/ClassicPress!
+Wirf einen Blick in unser [PSOURCE Sortiment](https://n3rds.work/psource_kategorien/psource-plugins/) und hole noch mehr aus Deinem ClassicPress/ClassicPress!
 
 Halte Dich mit unserem [Newsletter](https://n3rds.work/webmasterservice-n3rdswork-digalize-das-piestingtal/newsletter-management/) über unsere Piestingtal.Source informiert!
 

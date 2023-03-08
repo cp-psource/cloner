@@ -101,11 +101,6 @@ class PSOURCE_Cloner {
 		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'copier-filters.php' );
 		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'helpers/general.php' );
 		include_once( PSOURCE_CLONER_PLUGIN_DIR . 'helpers/settings.php' );
-
-		//load dashboard notice
-		global $psource_notices;
-		$psource_notices[] = array( 'id'=> 910773, 'name'=> 'Cloner', 'screens' => array( 'admin_page_clone_site-network', 'settings_page_cloner-network' ) );
-		//include_once( PSOURCE_CLONER_PLUGIN_DIR . 'externals/psource-dash-notification.php' );
 	}
 
 	public function load_plugin_textdomain() {

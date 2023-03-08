@@ -65,7 +65,7 @@ if ( ! class_exists( 'Site_Copier_Settings' ) ) {
 
             if ( $wpdb->last_error ) {
                 $this->log( 'class.copier-settings.php. Error copying settings: ' . $wpdb->last_error );
-                return new WP_Error( 'settings_error', __( 'Fehler beim Kopieren der Einstellungen', PSOURCE_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'settings_error', __( 'Fehler beim Kopieren der Einstellungen', 'psource-cloner' ) );
             }
 
             if ( ! function_exists( 'get_plugins' ) ) {

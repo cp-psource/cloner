@@ -92,20 +92,20 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
                     $thumbnail_id = $this->args['attachment_id'];
 
                 if ( ! $thumbnail_id )
-                    return new WP_Error( 'attachment_error', __( 'Falscher Anhang angegeben', PSOURCE_COPIER_LANG_DOMAIN) );
+                    return new WP_Error( 'attachment_error', __( 'Falscher Anhang angegeben', 'psource-cloner') );
 
                 if ( ! is_string( $thumbnail_id ) )
                     $source_attachment = get_blog_post( $this->source_blog_id, $thumbnail_id );
 
                 if ( ! $source_attachment )
-                    return new WP_Error( 'attachment_error', sprintf( __( 'Anhang (ID=%d) ist im Quellblog nicht vorhanden', PSOURCE_COPIER_LANG_DOMAIN), $thumbnail_id ) );
+                    return new WP_Error( 'attachment_error', sprintf( __( 'Anhang (ID=%d) ist im Quellblog nicht vorhanden', 'psource-cloner'), $thumbnail_id ) );
 
                 // Setting the new attachment properties
                 $new_attachment = (array)$source_attachment;
 
                 switch_to_blog( $this->source_blog_id );
 
-                // Thanks to WordPress Importer plugin
+                // Thanks to ClassicPress Importer plugin
                 add_filter( 'wp_get_attachment_url', 'copier_set_correct_wp_get_attachment_url' );
                 $url = wp_get_attachment_url( $thumbnail_id );
                 remove_filter( 'wp_get_attachment_url', 'copier_set_correct_wp_get_attachment_url' );
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
             if ( $info = wp_check_filetype( $upload['file'] ) )
                 $new_attachment['post_mime_type'] = $info['type'];
             else
-                return new WP_Error( 'filetype_error', __( 'Dateitypfehler: ' . $url, PSOURCE_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'filetype_error', __( 'Dateitypfehler: ' . $url, 'psource-cloner' ) );
 
             $new_attachment['guid'] = $upload['url'];
 
@@ -255,7 +255,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
                 }
 
                 // Now remap the uploaded image URL just in case the above code did nothing
-                // Again, code extracted from WordPress importer plugin
+                // Again, code extracted from ClassicPress importer plugin
                 $wpdb->query( $wpdb->prepare("UPDATE {$wpdb->posts} SET post_content = REPLACE(post_content, %s, %s)", $url, $upload['url'] ) );
                 $wpdb->query( $wpdb->prepare("UPDATE {$wpdb->postmeta} SET meta_value = REPLACE(meta_value, %s, %s) WHERE meta_key='enclosure'", $url, $upload['url'] ) );
             }
@@ -351,7 +351,7 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
          * Fetch an image and download it. Then create a new empty file for  it
          * that can be filled later
          * 
-         * Code based on WordPress Importer plugin
+         * Code based on ClassicPress Importer plugin
          * 
          * @return WP_Error/Array Image properties/Error
          */
@@ -370,31 +370,31 @@ if ( ! class_exists( 'Site_Copier_Attachment' ) ) {
             // request failed
             if ( ! $headers ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', sprintf( __('Der Remote-Server hat nicht auf die Datei geantwortet: %s', PSOURCE_COPIER_LANG_DOMAIN ), $url ) );
+                return new WP_Error( 'import_file_error', sprintf( __('Der Remote-Server hat nicht auf die Datei geantwortet: %s', 'psource-cloner' ), $url ) );
             }
 
             // make sure the fetch was successful
             if ( $headers['response'] != '200' ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', sprintf( __( 'Der Remote-Server hat eine Fehlerantwort zurückgegeben %1$d %2$s - %3$s', PSOURCE_COPIER_LANG_DOMAIN ), esc_html( $headers['response'] ), get_status_header_desc($headers['response'] ), $url ) );
+                return new WP_Error( 'import_file_error', sprintf( __( 'Der Remote-Server hat eine Fehlerantwort zurückgegeben %1$d %2$s - %3$s', 'psource-cloner' ), esc_html( $headers['response'] ), get_status_header_desc($headers['response'] ), $url ) );
             }
 
             $filesize = filesize( $upload['file'] );
 
             if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', __('Die Remote-Datei hat eine falsche Größe', PSOURCE_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'import_file_error', __('Die Remote-Datei hat eine falsche Größe', 'psource-cloner' ) );
             }
 
             if ( 0 == $filesize ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', __('Datei mit der Größe Null heruntergeladen', PSOURCE_COPIER_LANG_DOMAIN ) );
+                return new WP_Error( 'import_file_error', __('Datei mit der Größe Null heruntergeladen', 'psource-cloner' ) );
             }
 
             $max_size = (int) apply_filters( 'psource_copier_attachment_size_limit', 0 );
             if ( ! empty( $max_size ) && $filesize > $max_size ) {
                 @unlink( $upload['file'] );
-                return new WP_Error( 'import_file_error', sprintf(__('Remote-Datei ist zu groß, Limit ist %s', PSOURCE_COPIER_LANG_DOMAIN ), size_format($max_size) ) );
+                return new WP_Error( 'import_file_error', sprintf(__('Remote-Datei ist zu groß, Limit ist %s', 'psource-cloner' ), size_format($max_size) ) );
             }
 
             return $upload;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Based on Tom McFarlin's Plugin Boilerplate https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate
+ * Based on Tom McFarlin's Plugin Boilerplate https://github.com/tommcfarlin/ClassicPress-Plugin-Boilerplate
  */
 class PSOURCE_Cloner_Admin_Settings {
 
@@ -63,7 +63,7 @@ class PSOURCE_Cloner_Admin_Settings {
 
 
 	/**
-	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
+	 * Register the administration menu for this plugin into the ClassicPress Dashboard menu.
 	 *
 	 * @since    1.0.0
 	 */

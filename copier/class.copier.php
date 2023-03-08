@@ -2,13 +2,13 @@
 
 /**
  * Abstract class that stablish an structure for all subclasses
- * Every subclass should copy only one area of WordPress Core
+ * Every subclass should copy only one area of ClassicPress Core
  * 
  */
 if ( ! class_exists( 'Site_Copier' ) ) {
     abstract class Site_Copier {
 
-    	public function __construct( $source_blog_id, $template = array(), $args, $user_id = 0 ) {
+    	public function __construct( $source_blog_id, $args, $template = array(), $user_id = 0 ) {
             // The source blog ID from we are going to copy stuff
     		$this->source_blog_id = $source_blog_id;
 
