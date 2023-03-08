@@ -71,8 +71,8 @@ class PSOURCE_Cloner_Admin_Settings {
 
 		$this->plugin_screen_hook_suffix = add_submenu_page(
 			'settings.php',
-			__( 'Cloner-Einstellungen', PSOURCE_CLONER_LANG_DOMAIN ),
-			__( 'Cloner', PSOURCE_CLONER_LANG_DOMAIN ),
+			__( 'Cloner-Einstellungen', 'psource-cloner' ),
+			__( 'Cloner', 'psource-cloner' ),
 			'manage_network',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
@@ -119,7 +119,7 @@ class PSOURCE_Cloner_Admin_Settings {
 		if ( $menu_page_url ) {
 			$links = array_merge(
 				array(
-					'settings' => '<a href="' . network_admin_url( 'settings.php?page=' . $this->plugin_slug ) . '">' . __( 'Einstellungen', PSOURCE_CLONER_LANG_DOMAIN ) . '</a>'
+					'settings' => '<a href="' . network_admin_url( 'settings.php?page=' . $this->plugin_slug ) . '">' . __( 'Einstellungen', 'psource-cloner' ) . '</a>'
 				),
 				$links
 			);	
@@ -136,7 +136,7 @@ class PSOURCE_Cloner_Admin_Settings {
 		check_admin_referer( 'psource_cloner_settings' );
 
 		if ( empty( $_POST['to_copy'] ) ) {
-			add_settings_error( 'psource_cloner_settings', 'empty-settings', __( 'Du musst mindestens eine Option aktivieren', PSOURCE_CLONER_LANG_DOMAIN ) );
+			add_settings_error( 'psource_cloner_settings', 'empty-settings', __( 'Du musst mindestens eine Option aktivieren', 'psource-cloner' ) );
 			return;
 		}
 

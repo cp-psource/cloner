@@ -123,8 +123,8 @@ class PSOURCE_Cloner {
 			$dismiss_url = add_query_arg( 'cloner_dismiss_install_notice', 'true' );
 			?>
 				<div class="updated">
-					<p class="alignleft"><?php printf( __( 'Cloner wurde erfolgreich installiert und kann in <a href="%s">Einstellungen &raquo; Cloner</a> konfiguriert werden', PSOURCE_CLONER_LANG_DOMAIN ), network_admin_url( 'settings.php?page=cloner' ) ); ?></p>
-					<p class="alignright"><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button-secondary"><?php _e( 'Verwerfen', PSOURCE_CLONER_LANG_DOMAIN ); ?></a></p>
+					<p class="alignleft"><?php printf( __( 'Cloner wurde erfolgreich installiert und kann in <a href="%s">Einstellungen &raquo; Cloner</a> konfiguriert werden', 'psource-cloner' ), network_admin_url( 'settings.php?page=cloner' ) ); ?></p>
+					<p class="alignright"><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button-secondary"><?php _e( 'Verwerfen', 'psource-cloner' ); ?></a></p>
 					<div class="clear"></div>
 				</div>
 			<?php
@@ -199,7 +199,7 @@ class PSOURCE_Cloner {
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'site-name',
 			'id'     => 'clone-site',
-			'title'  => __( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ),
+			'title'  => __( 'Webseite klonen', 'psource-cloner' ),
 			'href'   => $url,
 		) );
 	}

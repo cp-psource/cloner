@@ -37,7 +37,7 @@ nocache_headers();
 		<p>
 			<?php 
 				printf( 
-					__( 'Du hast eine URL <u>ausgewählt, die bereits vorhanden ist</u>. Wenn Du "Weiter" wählst, werden alle vorhandenen Webseiten-Inhalte und -Einstellungen in %s <u>vollständig überschrieben</u> mit Inhalten und Einstellungen aus %s. Diese Änderung ist dauerhaft und kann nicht rückgängig gemacht werden. Sei also vorsichtig. ', PSOURCE_CLONER_LANG_DOMAIN ),
+					__( 'Du hast eine URL <u>ausgewählt, die bereits vorhanden ist</u>. Wenn Du "Weiter" wählst, werden alle vorhandenen Webseiten-Inhalte und -Einstellungen in %s <u>vollständig überschrieben</u> mit Inhalten und Einstellungen aus %s. Diese Änderung ist dauerhaft und kann nicht rückgängig gemacht werden. Sei also vorsichtig. ', 'psource-cloner' ),
 					'<strong>' . get_site_url( $destination_blog_details->blog_id ) . '</strong>', 
 					'<strong>' . get_site_url( $blog_details->blog_id ) . '</strong>' 
 				); 
@@ -65,8 +65,8 @@ nocache_headers();
 		<?php endif; ?>
 		<?php wp_nonce_field( 'clone-site-' . $blog_id, '_wpnonce_clone-site' ); ?>
 
-		<?php submit_button( __( 'Weiter', PSOURCE_CLONER_LANG_DOMAIN ), 'primary', 'confirm', false ); ?>
-		<a class="button-secondary" href="<?php echo esc_url( $back_url ); ?>"><?php _e( 'Nein, bitte ich möchte zurück', PSOURCE_CLONER_LANG_DOMAIN ); ?></a>
+		<?php submit_button( __( 'Weiter', 'psource-cloner' ), 'primary', 'confirm', false ); ?>
+		<a class="button-secondary" href="<?php echo esc_url( $back_url ); ?>"><?php _e( 'Nein, bitte ich möchte zurück', 'psource-cloner' ); ?></a>
 
 	</form>
 </body>

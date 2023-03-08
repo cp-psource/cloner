@@ -63,15 +63,15 @@ function psource_cloner_get_default_settings() {
 
 function psource_cloner_get_settings_labels() {
 	return array(
-		'settings' => __( 'Einstellungen', PSOURCE_CLONER_LANG_DOMAIN ),
-        'posts' => __( 'Beiträge', PSOURCE_CLONER_LANG_DOMAIN ),
-        'pages' => __( 'Seiten', PSOURCE_CLONER_LANG_DOMAIN ),
-        'cpts' => __( 'Benutzerdefinierte Beitragstypen', PSOURCE_CLONER_LANG_DOMAIN ),
-        'terms' => __( 'Terms', PSOURCE_CLONER_LANG_DOMAIN ),
-        'menus' => __( 'Menüs', PSOURCE_CLONER_LANG_DOMAIN ),
-        'users' => __( 'Benutzer', PSOURCE_CLONER_LANG_DOMAIN ),
-        'comments' => __( 'Kommentare', PSOURCE_CLONER_LANG_DOMAIN ),
-        'attachment' => __( 'Anhänge', PSOURCE_CLONER_LANG_DOMAIN ),
-        'tables' => __( 'Benutzerdefinierte Tabellen', PSOURCE_CLONER_LANG_DOMAIN )
+		'settings' => __( 'Einstellungen', 'psource-cloner' ),
+        'posts' => __( 'Beiträge', 'psource-cloner' ),
+        'pages' => __( 'Seiten', 'psource-cloner' ),
+        'cpts' => __( 'Benutzerdefinierte Beitragstypen', 'psource-cloner' ),
+        'terms' => __( 'Terms', 'psource-cloner' ),
+        'menus' => __( 'Menüs', 'psource-cloner' ),
+        'users' => __( 'Benutzer', 'psource-cloner' ),
+        'comments' => __( 'Kommentare', 'psource-cloner' ),
+        'attachment' => __( 'Anhänge', 'psource-cloner' ),
+        'tables' => __( 'Benutzerdefinierte Tabellen', 'psource-cloner' )
 	);
 }

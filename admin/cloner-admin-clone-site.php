@@ -68,7 +68,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 	public function add_site_action_link( $links, $blog_id ) {
 		if ( cloner_is_blog_clonable( $blog_id ) ) {
 			$clone_url = add_query_arg( 'blog_id', $blog_id, network_admin_url( 'index.php?page=clone_site' ) );
-			$links['clone'] = '<span class="clone"><a href="' . $clone_url . '">' . __( 'Klonen', PSOURCE_CLONER_LANG_DOMAIN ) . '</a></span>';	
+			$links['clone'] = '<span class="clone"><a href="' . $clone_url . '">' . __( 'Klonen', 'psource-cloner' ) . '</a></span>';	
 		}
 		
 
@@ -98,8 +98,8 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 
 		$this->plugin_screen_hook_suffix = add_submenu_page( 
 			null, 
-			__( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ), 
-			__( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ), 
+			__( 'Webseite klonen', 'psource-cloner' ), 
+			__( 'Webseite klonen', 'psource-cloner' ), 
 			'manage_network', 
 			'clone_site', 
 			array( &$this, 'display_admin_page' ) 
@@ -117,7 +117,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 
 		if ( ! $blog_details ) {
 			$message = sprintf( 
-				__( 'Der Blog, den Du kopieren möchtest, ist nicht vorhanden. <a href="%s">Versuche es mit einem anderen</a>.', PSOURCE_CLONER_LANG_DOMAIN ), 
+				__( 'Der Blog, den Du kopieren möchtest, ist nicht vorhanden. <a href="%s">Versuche es mit einem anderen</a>.', 'psource-cloner' ), 
 				network_admin_url( 'sites.php' ) 
 			); 
 			wp_die( $message );
@@ -125,7 +125,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 
 		if ( ! cloner_is_blog_clonable( $blog_id ) ) {
 			$message = sprintf( 
-				__( 'Die Webseite, die Du kopieren möchtest (%s), kann nicht geklont werden [ID %d]. <a href="%s">Versuche es mit einer anderen</a>.', PSOURCE_CLONER_LANG_DOMAIN ), 
+				__( 'Die Webseite, die Du kopieren möchtest (%s), kann nicht geklont werden [ID %d]. <a href="%s">Versuche es mit einer anderen</a>.', 'psource-cloner' ), 
 				$blog_details->blogname, 
 				$blog_id,
 				network_admin_url( 'sites.php' )
@@ -179,11 +179,11 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 			)
 		);
 
-		add_meta_box( 'cloner-destination', __( 'Ziel', PSOURCE_CLONER_LANG_DOMAIN), array( $this, 'destination_meta_box' ), 'cloner', 'normal' );
-		add_meta_box( 'cloner-options', __( 'Optionen', PSOURCE_CLONER_LANG_DOMAIN), array( $this, 'options_meta_box' ), 'cloner', 'normal' );
+		add_meta_box( 'cloner-destination', __( 'Ziel', 'psource-cloner'), array( $this, 'destination_meta_box' ), 'cloner', 'normal' );
+		add_meta_box( 'cloner-options', __( 'Optionen', 'psource-cloner'), array( $this, 'options_meta_box' ), 'cloner', 'normal' );
 
 		if ( ! empty( $additional_tables ) && $blog_id == 1 )
-			add_meta_box( 'cloner-advanced', __( 'Erweiterte Optionen', PSOURCE_CLONER_LANG_DOMAIN), array( $this, 'advanced_options_meta_box' ), 'cloner', 'normal' );
+			add_meta_box( 'cloner-advanced', __( 'Erweiterte Optionen', 'psource-cloner'), array( $this, 'advanced_options_meta_box' ), 'cloner', 'normal' );
 
 		do_action( 'psource_cloner_clone_site_screen' );
 		include_once( 'views/clone-site.php' );
@@ -231,7 +231,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 
 		// Does the source blog exists?
 		if ( ! $blog_id || empty( $blog_details ) ) {
-			add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog, den Du kopieren möchtest, existiert nicht', PSOURCE_CLONER_LANG_DOMAIN ) );
+			add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog, den Du kopieren möchtest, existiert nicht', 'psource-cloner' ) );
 			return;
 		}
 
@@ -254,7 +254,7 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 				$blog = ! empty( $_REQUEST['blog_create'] ) ? $_REQUEST['blog_create'] : false;
 
 				if ( ! $blog ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', PSOURCE_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Bitte gib einen Webseiten-Namen ein', 'psource-cloner' ) );
 					return;
 				}
 
@@ -263,14 +263,14 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 					$domain = strtolower( $blog );
 
 				if ( empty( $domain ) ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', PSOURCE_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Fehlende oder ungültige Webseiten-Adresse.', 'psource-cloner' ) );
 					return;
 				}
 
 				$destination_blog_details = get_blog_details( $domain );
 
 				if ( ! empty( $destination_blog_details ) ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog existiert bereits', PSOURCE_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Der Blog existiert bereits', 'psource-cloner' ) );
 					return;
 				}
 
@@ -313,19 +313,19 @@ class PSOURCE_Cloner_Admin_Clone_Site {
 				}
 
 				if ( ! $destination_blog_id ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', PSOURCE_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', 'psource-cloner' ) );
 					return;
 				}
 
 				if ( $destination_blog_id == $blog_id ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Du kannst einen Blog nicht in sich selbst kopieren', PSOURCE_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Du kannst einen Blog nicht in sich selbst kopieren', 'psource-cloner' ) );
 					return;
 				}
 
 				$destination_blog_details = get_blog_details( $destination_blog_id );
 
 				if ( empty( $destination_blog_details ) ) {
-					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', PSOURCE_CLONER_LANG_DOMAIN ) );
+					add_settings_error( 'cloner', 'source_blog_not_exist', __( 'Die Webseite, die Du ersetzen möchtest, existiert nicht', 'psource-cloner' ) );
 					return;
 				}
 

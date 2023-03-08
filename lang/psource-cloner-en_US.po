@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cloner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-08 18:18+0000\n"
-"PO-Revision-Date: 2023-03-08 18:20+0000\n"
+"PO-Revision-Date: 2023-03-08 18:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (United States)\n"
 "Language: en_US\n"
@@ -18,90 +18,256 @@ msgstr ""
 #: copier/copier.php:526 copier/copier.php:529
 #, php-format
 msgid "%s Kopiert"
-msgstr ""
+msgstr "%s copied"
 
 #: copier/copier.php:503
 #, php-format
 msgid "%s kopiert"
-msgstr ""
+msgstr "%s copied"
 
 #: copier/copier.php:506
 #, php-format
 msgid "%s Menü kopiert"
-msgstr ""
+msgstr "%s menu copied"
 
 #: admin/views/confirmation.php:36
 msgid "Achtung!"
-msgstr ""
+msgstr "Attention!"
 
 #: admin/views/confirmation.php:10
 msgid "Aktion bestätigen"
-msgstr ""
+msgstr "Confirm action"
 
 #: copier/class.copier-attachment.php:101
 #, php-format
 msgid "Anhang (ID=%d) ist im Quellblog nicht vorhanden"
-msgstr ""
+msgstr "Attachment (ID=%d) does not exist in the source blog"
+
+#: helpers/settings.php:74
+msgid "Anhänge"
+msgstr "Attachments"
+
+#: admin/views/meta-boxes/options.php:3
+msgid "Behalte den Zielblogtitel"
+msgstr "Keep the target blog title"
 
 #: copier/class.copier-menus.php:62 copier/class.copier-menus.php:79
 msgid "Beim Kopieren des Menüs ist ein Fehler aufgetreten. ID: "
-msgstr ""
+msgstr "An error occurred while copying the menu. ID:"
+
+#: helpers/settings.php:67
+msgid "Beiträge"
+msgstr "Posts"
+
+#: helpers/settings.php:72
+msgid "Benutzer"
+msgstr "User"
+
+#: helpers/settings.php:69
+msgid "Benutzerdefinierte Beitragstypen"
+msgstr "Custom post types"
 
 #: copier/copier.php:501
 msgid "Benutzerdefinierte Beitragstypen kopiert"
-msgstr ""
+msgstr "Copied custom post types"
+
+#: helpers/settings.php:75
+msgid "Benutzerdefinierte Tabellen"
+msgstr "Custom Tables"
+
+#: admin/views/settings.php:23
+msgid "Bewege den Mauszeiger über eine Webseite und klicke auf \"Klonen\"."
+msgstr "Hover over a webpage and click Clone."
+
+#: admin/views/settings.php:65
+msgid "Bilder ersetzen"
+msgstr "Replace images"
+
+#: admin/cloner-admin-clone-site.php:257 integration/integration.php:34
+#: integration/integration.php:40
+msgid "Bitte gib einen Webseiten-Namen ein"
+msgstr "Please enter a website name"
+
+#: admin/views/meta-boxes/options.php:2
+msgid "Blog-Titel klonen"
+msgstr "Clone blog title"
+
+#: admin/views/meta-boxes/options.php:6
+msgid "Blog-Titel überschreiben mit"
+msgstr "Overwrite blog title with"
 
 #. Name of the plugin
+#: admin/cloner-admin-settings.php:75
 msgid "Cloner"
+msgstr "Cloner"
+
+#: cloner.php:126
+#, php-format
+msgid ""
+"Cloner wurde erfolgreich installiert und kann in <a href=\"%s\">"
+"Einstellungen &raquo; Cloner</a> konfiguriert werden"
 msgstr ""
+"Cloner was successfully installed and can be found in <a href=\"%s\">"
+"Settings &raquo; Cloner</a> to be configured"
+
+#: admin/cloner-admin-settings.php:74
+msgid "Cloner-Einstellungen"
+msgstr "Cloner Settings"
 
 #: copier/class.copier-attachment.php:391
 msgid "Datei mit der Größe Null heruntergeladen"
+msgstr "Zero size file downloaded"
+
+#: admin/cloner-admin-clone-site.php:273 integration/integration.php:74
+msgid "Der Blog existiert bereits"
+msgstr "The blog already exists"
+
+#: admin/cloner-admin-clone-site.php:234
+msgid "Der Blog, den Du kopieren möchtest, existiert nicht"
+msgstr "The blog you are trying to copy does not exist"
+
+#: admin/cloner-admin-clone-site.php:120
+#, php-format
+msgid ""
+"Der Blog, den Du kopieren möchtest, ist nicht vorhanden. <a href=\"%s\">"
+"Versuche es mit einem anderen</a>."
 msgstr ""
+"The blog you are trying to copy does not exist. <a href=\"%s\">Try "
+"another</a>."
 
 #: copier/class.copier-attachment.php:379
 #, php-format
 msgid "Der Remote-Server hat eine Fehlerantwort zurückgegeben %1$d %2$s - %3$s"
-msgstr ""
+msgstr "The remote server returned an error response %1$d %2$s - %3$s"
 
 #: copier/class.copier-attachment.php:373
 #, php-format
 msgid "Der Remote-Server hat nicht auf die Datei geantwortet: %s"
-msgstr ""
+msgstr "The remote server did not respond to the file: %s"
 
 #: copier/class.copier-attachment.php:386
 msgid "Die Remote-Datei hat eine falsche Größe"
+msgstr "The remote file is an incorrect size"
+
+#: admin/cloner-admin-clone-site.php:316 admin/cloner-admin-clone-site.php:328
+msgid "Die Webseite, die Du ersetzen möchtest, existiert nicht"
+msgstr "The website you are trying to replace does not exist"
+
+#: admin/cloner-admin-clone-site.php:128
+#, php-format
+msgid ""
+"Die Webseite, die Du kopieren möchtest (%s), kann nicht geklont werden [ID "
+"%d]. <a href=\"%s\">Versuche es mit einer anderen</a>."
 msgstr ""
+"The website you are trying to copy (%s) cannot be cloned [ID %d]. <a "
+"href=\"%s\">Try another</a>."
+
+#: admin/views/meta-boxes/advanced.php:1
+msgid ""
+"Du hast Dich entschieden, den Hauptblog zu klonen. Bitte <strong>wähle die "
+"Tabellen aus, die geklont werden sollen</strong>. Beachte dass reine "
+"Netzwerktabellen viel Platz und viel Zeit zum Klonen beanspruchen können."
+msgstr ""
+"You have decided to clone the main blog. Please <strong>select the tables to "
+"be cloned</strong>. Note that network-only tables can take up a lot of space "
+"and time to clone."
+
+#: admin/views/confirmation.php:40
+#, php-format
+msgid ""
+"Du hast eine URL <u>ausgewählt, die bereits vorhanden ist</u>. Wenn Du "
+"\"Weiter\" wählst, werden alle vorhandenen Webseiten-Inhalte und -"
+"Einstellungen in %s <u>vollständig überschrieben</u> mit Inhalten und "
+"Einstellungen aus %s. Diese Änderung ist dauerhaft und kann nicht rückgängig "
+"gemacht werden. Sei also vorsichtig. "
+msgstr ""
+"You <u>selected a URL that already exists</u>. If you choose \"Continue\", "
+"any existing website content and settings in %s will <u>completely "
+"overwrite</u> with content and settings from %s. This change is permanent "
+"and cannot be undone. So be careful."
+
+#: admin/cloner-admin-clone-site.php:321
+msgid "Du kannst einen Blog nicht in sich selbst kopieren"
+msgstr "You cannot copy a blog into itself"
+
+#: admin/cloner-admin-settings.php:139
+msgid "Du musst mindestens eine Option aktivieren"
+msgstr "You have to activate at least one option"
 
 #: copier/copier.php:742
 msgid "Ein Fehler ist aufgetreten"
-msgstr ""
+msgstr "An error has occurred"
 
 #: copier/class.copier-tables.php:96
 #, php-format
 msgid "Einfügefehler: %s"
-msgstr ""
+msgstr "Insertion error: %s"
+
+#: admin/cloner-admin-settings.php:122 helpers/settings.php:66
+msgid "Einstellungen"
+msgstr "Settings"
+
+#: admin/views/settings.php:10
+msgid "Einstellungen aktualisiert"
+msgstr "Settings updated"
+
+#: admin/views/settings.php:50
+msgid "Ersetze URLs und Bilder"
+msgstr "Replace URLs and images"
+
+#: integration/views/multi-domains-destination-meta-box.php:59
+#: admin/views/meta-boxes/destination.php:24
+msgid "Ersetze vorhandene Webseite"
+msgstr "Replace existing website"
+
+#: admin/views/settings.php:16
+msgid "Erste Schritte:"
+msgstr "First steps:"
+
+#: integration/views/multi-domains-destination-meta-box.php:37
+#: admin/views/meta-boxes/destination.php:5
+msgid "Erstelle eine neue Webseite"
+msgstr "Create a new website"
+
+#: admin/cloner-admin-clone-site.php:186
+msgid "Erweiterte Optionen"
+msgstr "Expanded options"
 
 #: copier/class.copier-attachment.php:95
 msgid "Falscher Anhang angegeben"
-msgstr ""
+msgstr "Incorrect attachment specified"
+
+#: admin/cloner-admin-clone-site.php:266 integration/integration.php:47
+#: integration/integration.php:56
+msgid "Fehlende oder ungültige Webseiten-Adresse."
+msgstr "Missing or invalid website address."
 
 #: copier/copier.php:468
 #, php-format
 msgid "Fehler beim Abrufen der Klasse (%s)"
-msgstr ""
+msgstr "Error getting class (%s)"
 
 #: copier/copier.php:346
 msgid "Fehler beim Abrufen der Option"
-msgstr ""
+msgstr "Error getting option"
 
 #: copier/class.copier-settings.php:68
 msgid "Fehler beim Kopieren der Einstellungen"
-msgstr ""
+msgstr "Error copying settings"
+
+#: integration/views/multi-domains-destination-meta-box.php:45
+#: admin/views/meta-boxes/destination.php:9
+#: admin/views/meta-boxes/destination.php:13
+msgid "Gib hier Deinen Webseiten-Namen ein..."
+msgstr "Enter your website name here..."
+
+#: admin/views/meta-boxes/options.php:15
+msgid "Halte Suchmaschinen davon ab, die geklonte Webseite zu indizieren"
+msgstr "Stop search engines from indexing the cloned website"
 
 #. Author URI of the plugin
 msgid "https://n3rds.work"
-msgstr ""
+msgstr "https://n3rds.work"
 
 #. URI of the plugin
 msgid ""
@@ -109,29 +275,54 @@ msgid ""
 "mausklick/"
 msgstr ""
 
+#: admin/views/clone-site.php:194
+msgid "Ignoriere diese Tabellen"
+msgstr "Ignore these tables"
+
 #: copier/copier.php:697
 msgid "Kehre zum Dashboard zurück"
-msgstr ""
+msgstr "Return to the dashboard"
 
 #: copier/copier.php:397
 msgid "Keine Anhänge zum Kopieren"
-msgstr ""
+msgstr "No attachments to copy"
 
 #: copier/class.copier-post-types.php:100
 msgid "Keine Beiträge zum Kopieren"
-msgstr ""
+msgstr "No posts to copy"
 
 #: copier/class.copier-post-types.php:25
 msgid "Keine benutzerdefinierten Beitragstypen zum Kopieren"
-msgstr ""
+msgstr "No custom post types to copy"
 
 #: copier/class.copier-menus.php:32 copier/copier.php:433
 msgid "Keine zu kopierenden Menüs"
-msgstr ""
+msgstr "No menus to copy"
 
 #. Description of the plugin
 msgid "Klone Webseiten in einer Multisite-Netzwerkinstallation"
-msgstr ""
+msgstr "Clone websites in a multisite network installation"
+
+#: admin/cloner-admin-clone-site.php:71 admin/views/clone-site.php:7
+msgid "Klonen"
+msgstr "Clone"
+
+#: helpers/settings.php:73
+msgid "Kommentare"
+msgstr "Comments"
+
+#: admin/views/clone-site.php:195
+msgid "Kopiere diese Tabellen"
+msgstr "Copy these tables"
+
+#: integration/views/multi-domains-destination-meta-box.php:66
+#: admin/views/meta-boxes/destination.php:31
+msgid "Leer lassen, um zur Hauptseite zu klonen"
+msgstr "Leave blank to clone to main page"
+
+#: admin/views/settings.php:58
+msgid "Links ersetzen"
+msgstr "Replace links"
 
 #: copier/class.copier-tables.php:192
 #, php-format
@@ -139,56 +330,117 @@ msgid ""
 "Löschfehler: %1$s - Die Vorlage wurde nicht angewendet. (Neue Blog-Vorlagen -"
 " Beim Löschen von %2$s)"
 msgstr ""
+"Deletion Error: %1$s - The template was not applied. (New Blog Templates - "
+"When deleting %2$s)"
+
+#: helpers/settings.php:71
+msgid "Menüs"
+msgstr "Menus"
+
+#: admin/views/settings.php:19
+#, php-format
+msgid "Navigiere zu <a href=\"%s\">Netzwerkadministrator &raquo; Webseiten</a>"
+msgstr "Navigate to <a href=\"%s\">Network Admin &raquo; websites</a>"
+
+#: admin/views/confirmation.php:69
+msgid "Nein, bitte ich möchte zurück"
+msgstr "No, please, I want to go back"
 
 #: copier/copier.php:650
 msgid "Neuer Blog-Setup"
-msgstr ""
+msgstr "New blog setup"
 
 #: copier/copier.php:695
 msgid "Nächster Schritt"
-msgstr ""
+msgstr "Next Step"
+
+#: admin/cloner-admin-clone-site.php:183
+msgid "Optionen"
+msgstr "Options"
 
 #: copier/copier.php:376
 msgid "Prozess abgeschlossen"
-msgstr ""
+msgstr "Process completed"
 
 #: copier/class.copier-attachment.php:397
 #, php-format
 msgid "Remote-Datei ist zu groß, Limit ist %s"
-msgstr ""
+msgstr "Remote file is too big, limit is %s"
+
+#: helpers/settings.php:68
+msgid "Seiten"
+msgstr "Pages"
 
 #: copier/copier.php:680
 msgid ""
 "Setze WP_DEBUG und WP_DEBUG_DISPLAY auf false, wenn dieser Bildschirm "
 "automatisch statt manuell funktionieren soll"
 msgstr ""
+"Set WP_DEBUG and WP_DEBUG_DISPLAY to false if you want this screen to work "
+"automatically instead of manually"
 
 #: copier/copier.php:795 copier/copier.php:799
 msgid "Sicherheitsfehler"
-msgstr ""
+msgstr "Security error"
+
+#: admin/views/meta-boxes/options.php:1
+msgid "Site Title"
+msgstr "Site Title"
 
 #: copier/copier.php:693
 msgid "Start"
-msgstr ""
+msgstr "Start"
+
+#: helpers/settings.php:70
+msgid "Terms"
+msgstr "Terms"
 
 #: admin/cloner-admin-clone-site.php:387
 msgid "Unbekannter Fehler"
-msgstr ""
+msgstr "Unknown error"
+
+#: cloner.php:127
+msgid "Verwerfen"
+msgstr "Chancel"
+
+#: cloner.php:202 admin/cloner-admin-clone-site.php:101
+#: admin/cloner-admin-clone-site.php:102 admin/views/clone-site.php:2
+#: admin/views/clone-site.php:29
+msgid "Webseite klonen"
+msgstr "Clone website"
+
+#: admin/views/confirmation.php:68
+msgid "Weiter"
+msgstr "Continue"
 
 #: copier/copier.php:685 copier/copier.php:691
 msgid "Weiterleitung zum Dashboard..."
-msgstr ""
+msgstr "Redirecting to Dashboard..."
 
 #: copier/copier.php:624
 msgid "Wir richten Deinen neuen Blog ein. Warte bitte einen Moment..."
-msgstr ""
+msgstr "We set up your new blog. Please wait a moment..."
 
 #. Author of the plugin
 msgid "WMS N@W"
-msgstr ""
+msgstr "WMS N@W"
+
+#: admin/views/settings.php:27
+msgid "Wähle den Inhalt aus, den Du kopieren möchtest:"
+msgstr "Select the content you want to copy:"
+
+#: admin/views/clone-site.php:14
+msgid "Wähle eine andere Webseite"
+msgstr "Choose another website"
 
 #: copier/copier.php:683
 msgid ""
 "XDebug ist aktiviert. Deaktiviere es, wenn dieser Bildschirm nicht manuell, "
 "sondern automatisch funktionieren soll"
 msgstr ""
+"XDebug is enabled. Disable it if you don't want this screen to work manually,"
+" but automatically"
+
+#: admin/cloner-admin-clone-site.php:182 integration/integration.php:8
+msgid "Ziel"
+msgstr "Target"

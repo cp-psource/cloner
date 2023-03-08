@@ -1,17 +1,17 @@
 <div class="wrap">
-	<h2><?php echo esc_html( __( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ) ); ?></h2>
+	<h2><?php echo esc_html( __( 'Webseite klonen', 'psource-cloner' ) ); ?></h2>
 
 		<?php settings_errors( 'cloner' ); ?>
 		<?php if ( ! empty( $blog_details ) ): ?>
 			<p id="cloner-blog-details">
-				<span class="cloner-head"><?php _e( 'Klonen', PSOURCE_CLONER_LANG_DOMAIN ); ?></span> 
+				<span class="cloner-head"><?php _e( 'Klonen', 'psource-cloner' ); ?></span> 
 				<?php if ( is_subdomain_install() ): ?>
 					<span class="cloner-subdomain"><?php echo $subdomain; ?></span><span class="cloner-domain"><?php echo $domain; ?></span>
 				<?php else: ?>
 					<span class="cloner-domain"><?php echo $domain; ?></span><span class="cloner-subdomain"><?php echo $subdomain; ?></span>
 				<?php endif; ?>
 
-				<span class="cloner-back-link"> <a href="<?php echo network_admin_url( 'sites.php' ); ?>"><?php _e( 'Wähle eine andere Webseite', PSOURCE_CLONER_LANG_DOMAIN ); ?></a></span>
+				<span class="cloner-back-link"> <a href="<?php echo network_admin_url( 'sites.php' ); ?>"><?php _e( 'Wähle eine andere Webseite', 'psource-cloner' ); ?></a></span>
 			</p>
 		<?php endif; ?>
 		<hr/>
@@ -26,7 +26,7 @@
 				<?php do_meta_boxes( 'cloner', 'normal', null ); ?>
 			</div>
 
-			<?php submit_button( __( 'Webseite klonen', PSOURCE_CLONER_LANG_DOMAIN ), 'primary', 'clone-site-submit' ); ?>
+			<?php submit_button( __( 'Webseite klonen', 'psource-cloner' ), 'primary', 'clone-site-submit' ); ?>
 		</form>
 </div>
 
@@ -191,8 +191,8 @@
 		});
 
 		jQuery('#additional-tables-selector').multiSelect({
-			'selectableHeader': '<p class="multiselect-header"><?php _e( "Ignoriere diese Tabellen", PSOURCE_CLONER_LANG_DOMAIN ); ?></p>',
-			'selectionHeader': '<p class="multiselect-header"><?php _e( "Kopiere diese Tabellen", PSOURCE_CLONER_LANG_DOMAIN ); ?></p>',
+			'selectableHeader': '<p class="multiselect-header"><?php _e( "Ignoriere diese Tabellen", 'psource-cloner' ); ?></p>',
+			'selectionHeader': '<p class="multiselect-header"><?php _e( "Kopiere diese Tabellen", 'psource-cloner' ); ?></p>',
 			afterSelect: function(value) {
 				jQuery('#table-' + value).attr('checked',true);
 			},
